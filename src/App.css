@@ -1,5 +1,16 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: "BricolageGrotesque";
+  src: url("/fonts/BricolageGrotesque-VariableFont_opsz,wdth,wght.ttf");
+}
+@font-face {
+  font-family: "DMSans";
+  src: url("/fonts/DMSans-VariableFont_opsz,wght.ttf");
+}
+
 @theme {
   --color-background: #02012b;
+  --font-bricolage-grotesque: "BricolageGrotesque";
+  --font-dmsans: "DMSans";
 }
