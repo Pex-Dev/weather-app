@@ -11,6 +11,7 @@
 
 @theme {
   --color-background: #02012b;
+  --color-ui-main: #25253f;
   --font-bricolage-grotesque: "BricolageGrotesque";
   --font-dmsans: "DMSans";
 }
