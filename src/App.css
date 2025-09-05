@@ -14,3 +14,7 @@
   --font-bricolage-grotesque: "BricolageGrotesque";
   --font-dmsans: "DMSans";
 }
+
+body {
+  font-family: "DMSans";
+}
