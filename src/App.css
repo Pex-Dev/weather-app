@@ -12,6 +12,7 @@
 @theme {
   --color-background: #02012b;
   --color-ui-main: #25253f;
+  --color-ui-main-hover: #30304a;
   --font-bricolage-grotesque: "BricolageGrotesque";
   --font-dmsans: "DMSans";
 }
