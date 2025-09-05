@@ -13,6 +13,8 @@
   --color-background: #02012b;
   --color-ui-main: #25253f;
   --color-ui-main-hover: #30304a;
+  --color-label: #848297;
+  --color-ui-main-border: #3b3a5c;
   --font-bricolage-grotesque: "BricolageGrotesque";
   --font-dmsans: "DMSans";
 }
