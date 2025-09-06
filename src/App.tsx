@@ -2,6 +2,7 @@ import "./App.css";
 import Header from "./components/layout/Header";
 import Title from "./components/layout/Title";
 import SearchBar from "./components/UI/SearchBar";
+import Dashboard from "./components/layout/Dashboard";
 
 function App() {
   return (
@@ -9,6 +10,7 @@ function App() {
       <Header />
       <Title />
       <SearchBar />
+      <Dashboard />
     </div>
   );
 }
