@@ -1,10 +1,25 @@
 import iconUnits from "../../assets/images/icon-units.svg";
 import iconDropdown from "../../assets/images/icon-dropdown.svg";
 import UnitsDropdown from "./UnitsDropdown";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function UnitsSelector() {
   const [showDropdown, setShowDropdown] = useState<Boolean>(false);
+  const unitsDropdownMenuRef = useRef<HTMLDivElement>(null);
+
+  //Close menu when click outside
+  useEffect(() => {
+    const HandleClickOutside = (e: MouseEvent) => {
+      if (
+        unitsDropdownMenuRef &&
+        !unitsDropdownMenuRef.current?.contains(e.target as Node)
+      ) {
+        setShowDropdown(false);
+      }
+    };
+
+    window.addEventListener("mousedown", HandleClickOutside);
+  }, [showDropdown]);
 
   return (
     <div className="relative">
@@ -16,7 +31,7 @@ export default function UnitsSelector() {
         <span className=" text-white font-light">Units</span>
         <img src={iconDropdown} alt="Icon dropdown" className="max-w-3" />
       </button>
-      {showDropdown && <UnitsDropdown />}
+      {showDropdown && <UnitsDropdown ref={unitsDropdownMenuRef} />}
     </div>
   );
 }
