@@ -19,6 +19,8 @@
   --font-dmsans: "DMSans";
 }
 
-body {
-  font-family: "DMSans";
+@layer base {
+  body {
+    font-family: "DMSans";
+  }
 }
