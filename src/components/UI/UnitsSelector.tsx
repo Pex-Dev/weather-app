@@ -5,15 +5,14 @@ import { useEffect, useRef, useState } from "react";
 
 export default function UnitsSelector() {
   const [showDropdown, setShowDropdown] = useState<Boolean>(false);
-  const unitsDropdownMenuRef = useRef<HTMLDivElement>(null);
+  const unitsDiv = useRef<HTMLDivElement>(null);
 
   //Close menu when click outside
   useEffect(() => {
     const HandleClickOutside = (e: MouseEvent) => {
-      if (
-        unitsDropdownMenuRef &&
-        !unitsDropdownMenuRef.current?.contains(e.target as Node)
-      ) {
+      if (unitsDiv && !unitsDiv.current?.contains(e.target as Node)) {
+        console.log(e.target);
+
         setShowDropdown(false);
       }
     };
@@ -22,7 +21,7 @@ export default function UnitsSelector() {
   }, [showDropdown]);
 
   return (
-    <div className="relative">
+    <div ref={unitsDiv} className="relative">
       <button
         onClick={() => setShowDropdown((prev) => !prev)}
         className="bg-ui-main hover:bg-ui-main-hover hover:cursor-pointer transition-colors flex justify-between gap-1.5 items-center py-1 md:py-2 px-3 md:px-4 rounded-md"
@@ -31,7 +30,7 @@ export default function UnitsSelector() {
         <span className=" text-white font-light">Units</span>
         <img src={iconDropdown} alt="Icon dropdown" className="max-w-3" />
       </button>
-      {showDropdown && <UnitsDropdown ref={unitsDropdownMenuRef} />}
+      {showDropdown && <UnitsDropdown />}
     </div>
   );
 }
