@@ -11,8 +11,6 @@ export default function UnitsSelector() {
   useEffect(() => {
     const HandleClickOutside = (e: MouseEvent) => {
       if (unitsDiv && !unitsDiv.current?.contains(e.target as Node)) {
-        console.log(e.target);
-
         setShowDropdown(false);
       }
     };
