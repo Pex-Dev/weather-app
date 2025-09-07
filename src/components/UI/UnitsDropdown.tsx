@@ -6,7 +6,7 @@ export default function UnitsDropdown({
   return (
     <div
       ref={ref}
-      className="absolute mt-3 right-0 bg-ui-main border border-ui-main-border rounded-md md:rounded-xl p-2 min-w-[212px]"
+      className="absolute mt-3 right-0 bg-ui-main border border-ui-main-border rounded-md md:rounded-xl p-2 min-w-[212px] z-10"
     >
       <button className="text-white text-nowrap p-2 hover:bg-ui-main-hover w-full rounded text-left hover:cursor-pointer">
         Switch to imperial
