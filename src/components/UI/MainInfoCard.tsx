@@ -2,7 +2,7 @@ import iconSunny from "../../assets/images/icon-sunny.webp";
 
 export default function MainInfoCard() {
   return (
-    <div className="mt-15 py-12 md:px-5 flex flex-col md:flex-row md:items-center md:justify-between gap-9 bg-[url('/images/bg-today-small.svg')] md:bg-[url('/images/bg-today-large.svg')]  bg-no-repeat bg-cover  rounded-3xl overflow-hidden">
+    <div className="py-12 md:px-5 flex flex-col md:flex-row md:items-center md:justify-between gap-9 bg-[url('/images/bg-today-small.svg')] md:bg-[url('/images/bg-today-large.svg')]  bg-no-repeat bg-cover  rounded-3xl overflow-hidden">
       <div className="flex flex-col gap-2">
         <h2 className="text-white text-center text-2xl font-semibold">
           Berlin, Germany
