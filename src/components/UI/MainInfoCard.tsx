@@ -12,7 +12,11 @@ export default function MainInfoCard() {
         </p>
       </div>
       <div className="flex items-center gap-2 mx-auto md:mx-0">
-        <img src={iconSunny} alt="Icon sunny" className="max-w-32" />
+        <img
+          src={iconSunny}
+          alt="Icon sunny"
+          className="max-w-30 md:max-w-32"
+        />
         <p className="text-8xl font-bold text-white italic">
           68<span className="not-italic"> °</span>
         </p>
