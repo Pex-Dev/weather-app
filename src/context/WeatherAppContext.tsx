@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import type { Units } from "../types/Types";
 
 type WeatherState = {
@@ -26,6 +26,14 @@ export default function WeatherProvider({
     wind: "kmh",
     precipitation: "mm",
   });
+
+  useEffect(() => {
+    setUnits({
+      temperature: mainUnits === "metric" ? "celsius" : "fahrenheit",
+      wind: mainUnits === "metric" ? "kmh" : "mph",
+      precipitation: mainUnits === "metric" ? "mm" : "inch",
+    });
+  }, [mainUnits]);
 
   const HandleUnitChange = (
     unit: "temperature" | "wind" | "precipitation",
