@@ -1,9 +1,9 @@
 import { createContext, useContext, useState } from "react";
-import type { Unit } from "../types/Types";
+import type { Units } from "../types/Types";
 
 type WeatherState = {
-  units: Unit;
-  setUnits: React.Dispatch<React.SetStateAction<Unit>>;
+  units: Units;
+  setUnits: React.Dispatch<React.SetStateAction<Units>>;
 };
 
 //Crear context
@@ -15,7 +15,11 @@ export default function WeatherProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const [units, setUnits] = useState<Unit>("imperial");
+  const [units, setUnits] = useState<Units>({
+    temperature: "celsius",
+    wind: "kmh",
+    precipitation: "mm",
+  });
 
   return (
     <WeatherContext.Provider value={{ units, setUnits }}>
