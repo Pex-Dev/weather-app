@@ -3,7 +3,12 @@ import type { Units } from "../types/Types";
 
 type WeatherState = {
   units: Units;
-  setUnits: React.Dispatch<React.SetStateAction<Units>>;
+  HandleUnitChange: (
+    unit: "temperature" | "wind" | "precipitation",
+    value: "celsius" | "fahrenheit" | "kmh" | "mph" | "mm" | "inch"
+  ) => void;
+  mainUnits: "imperial" | "metric";
+  setMainUnits: React.Dispatch<React.SetStateAction<"imperial" | "metric">>;
 };
 
 //Crear context
@@ -15,14 +20,43 @@ export default function WeatherProvider({
 }: {
   children: React.ReactNode;
 }) {
+  const [mainUnits, setMainUnits] = useState<"imperial" | "metric">("metric");
   const [units, setUnits] = useState<Units>({
     temperature: "celsius",
     wind: "kmh",
     precipitation: "mm",
   });
 
+  const HandleUnitChange = (
+    unit: "temperature" | "wind" | "precipitation",
+    value: "celsius" | "fahrenheit" | "kmh" | "mph" | "mm" | "inch"
+  ) => {
+    setUnits((prevUnits) => {
+      const newUnits: Units = {
+        temperature:
+          unit === "temperature" &&
+          (value === "celsius" || value === "fahrenheit")
+            ? value
+            : prevUnits.temperature,
+
+        wind:
+          unit === "wind" && (value === "kmh" || value === "mph")
+            ? value
+            : prevUnits.wind,
+        precipitation:
+          unit === "precipitation" && (value === "mm" || value === "inch")
+            ? value
+            : prevUnits.precipitation,
+      };
+
+      return newUnits;
+    });
+  };
+
   return (
-    <WeatherContext.Provider value={{ units, setUnits }}>
+    <WeatherContext.Provider
+      value={{ units, HandleUnitChange, mainUnits, setMainUnits }}
+    >
       {children}
     </WeatherContext.Provider>
   );
