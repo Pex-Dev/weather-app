@@ -2,12 +2,20 @@ import { UseWeatherContext } from "../../context/WeatherAppContext";
 import UnitLabel from "./UnitLabel";
 
 export default function UnitsDropdown() {
-  const { units, HandleUnitChange } = UseWeatherContext();
+  const { units, HandleUnitChange, mainUnits, setMainUnits } =
+    UseWeatherContext();
 
   return (
     <div className="absolute mt-3 right-0 bg-ui-main border border-ui-main-border rounded-md md:rounded-xl p-2 min-w-[212px] z-10">
-      <button className="text-white text-nowrap p-2 hover:bg-ui-main-hover w-full rounded text-left hover:cursor-pointer">
-        Switch to imperial
+      <button
+        onClick={() =>
+          setMainUnits((pMainUnits) =>
+            pMainUnits === "imperial" ? "metric" : "imperial"
+          )
+        }
+        className="text-white text-nowrap p-2 hover:bg-ui-main-hover w-full rounded text-left hover:cursor-pointer"
+      >
+        Switch to {mainUnits === "imperial" ? "metric" : "imperial"}
       </button>
       <div className="flex flex-col z-10">
         <h3 className="text-label text-sm px-2 mb-2">Temperature</h3>
