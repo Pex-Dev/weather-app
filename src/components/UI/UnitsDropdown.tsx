@@ -17,7 +17,7 @@ export default function UnitsDropdown() {
       >
         Switch to {mainUnits === "imperial" ? "metric" : "imperial"}
       </button>
-      <div className="flex flex-col z-10">
+      <div className="flex flex-col z-10 gap-[1px]">
         <h3 className="text-label text-sm px-2 mb-2">Temperature</h3>
         <UnitLabel
           label="Celsius (°C)"
@@ -35,7 +35,7 @@ export default function UnitsDropdown() {
         />
       </div>
       <hr className="text-gray-700 h-[1px] my-2" />
-      <div className="flex flex-col z-10">
+      <div className="flex flex-col z-10 gap-[1px]">
         <h3 className="text-label text-sm px-2 mb-2">Wind Speed</h3>
         <UnitLabel
           label="km/h"
@@ -53,7 +53,7 @@ export default function UnitsDropdown() {
         />
       </div>
       <hr className="text-gray-700 h-[1px] my-2" />
-      <div className="flex flex-col z-10">
+      <div className="flex flex-col z-10 gap-[1px]">
         <h3 className="text-label text-sm px-2 mb-2">Precipitation</h3>
         <UnitLabel
           label="Milimeters (mm)"
