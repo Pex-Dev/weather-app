@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import type { Units } from "../types/Types";
+import type { Units, SearchResults, Result } from "../types/Types";
 
 type WeatherState = {
   units: Units;
@@ -9,6 +9,7 @@ type WeatherState = {
   ) => void;
   mainUnits: "imperial" | "metric";
   setMainUnits: React.Dispatch<React.SetStateAction<"imperial" | "metric">>;
+  SearchLocation: (location: string) => Promise<Result[] | null>;
 };
 
 //Crear context
@@ -61,9 +62,26 @@ export default function WeatherProvider({
     });
   };
 
+  const SearchLocation = async (location: string): Promise<Result[] | null> => {
+    const url = `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(
+      location
+    )}&count=10&language=en&format=json`;
+
+    const response = await fetch(url);
+    const data: SearchResults = await response.json();
+    if (!data.results) return null;
+    return data.results;
+  };
+
   return (
     <WeatherContext.Provider
-      value={{ units, HandleUnitChange, mainUnits, setMainUnits }}
+      value={{
+        units,
+        HandleUnitChange,
+        mainUnits,
+        setMainUnits,
+        SearchLocation,
+      }}
     >
       {children}
     </WeatherContext.Provider>
