@@ -31,3 +31,10 @@ export type Result = {
   admin4?: string;
   postcodes?: string[];
 };
+
+export type SearchStatus =
+  | "idle"
+  | "loading"
+  | "success"
+  | "no-results"
+  | "error";
