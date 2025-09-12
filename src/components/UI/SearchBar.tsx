@@ -11,7 +11,7 @@ export default function SearchBar() {
 
   const searchDivRef = useRef<HTMLDivElement>(null);
 
-  const { SearchLocation } = UseWeatherContext();
+  const { SearchLocation, setSearchStatus } = UseWeatherContext();
 
   let inputClassName = `bg-ui-main hover:bg-ui-main-hover border-2 border-transparent focus-visible:border-background focus-visible:outline-2 focus-visible:outline-white focus-visible:border-2 transition-colors hover:cursor-pointer w-full rounded-lg text-white text-lg py-3.5`;
   inputClassName += inputText.length > 0 ? " p-3" : " pl-15";
@@ -27,7 +27,8 @@ export default function SearchBar() {
     if (inputText.length < 3) return;
     setSearchInProgress(true);
     const results: Result[] | null = await SearchLocation(inputText);
-    setResults(results ? results : []);
+    if (!results) setSearchStatus("no-results");
+    setResults(results);
     setSearchInProgress(false);
   };
 
