@@ -13,6 +13,7 @@ type WeatherState = {
     value: "celsius" | "fahrenheit" | "kmh" | "mph" | "mm" | "inch"
   ) => void;
   searchStatus: SearchStatus;
+  setSearchStatus: React.Dispatch<React.SetStateAction<SearchStatus>>;
   mainUnits: "imperial" | "metric";
   setMainUnits: React.Dispatch<React.SetStateAction<"imperial" | "metric">>;
   SearchLocation: (location: string) => Promise<Result[] | null>;
@@ -89,6 +90,7 @@ export default function WeatherProvider({
         setMainUnits,
         SearchLocation,
         searchStatus,
+        setSearchStatus,
       }}
     >
       {children}
