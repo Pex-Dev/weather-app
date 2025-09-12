@@ -4,6 +4,7 @@ import type {
   SearchResults,
   Result,
   SearchStatus,
+  Weather,
 } from "../types/Types";
 
 type WeatherState = {
@@ -80,6 +81,34 @@ export default function WeatherProvider({
     if (!data.results) return null;
     return data.results;
   };
+
+  const GetWeather = async (latitude: number, longitude: number) => {
+    if (searchStatus === "loading") return;
+    setSearchStatus("loading");
+
+    try {
+      const url = `https://api.open-meteo.com/v1/forecast?latitude=${encodeURIComponent(
+        latitude
+      )}&longitude=${encodeURIComponent(
+        longitude
+      )}&hourly=temperature_2m&current=temperature_2m,precipitation,weather_code,wind_speed_10m,relative_humidity_2m&timezone=auto&wind_speed_unit=${
+        units.wind
+      }&temperature_unit=${units.temperature}&precipitation_unit=${
+        units.precipitation
+      }`;
+      const response = await fetch(url);
+      const weather: Weather = await response.json();
+      console.log(weather);
+      setSearchStatus("success");
+    } catch (error) {
+      console.error(error);
+      setSearchStatus("error");
+    }
+  };
+
+  useEffect(() => {
+    GetWeather(-33.4569, -70.6483);
+  }, []);
 
   return (
     <WeatherContext.Provider
