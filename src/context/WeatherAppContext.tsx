@@ -1,5 +1,10 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import type { Units, SearchResults, Result } from "../types/Types";
+import type {
+  Units,
+  SearchResults,
+  Result,
+  SearchStatus,
+} from "../types/Types";
 
 type WeatherState = {
   units: Units;
@@ -7,6 +12,7 @@ type WeatherState = {
     unit: "temperature" | "wind" | "precipitation",
     value: "celsius" | "fahrenheit" | "kmh" | "mph" | "mm" | "inch"
   ) => void;
+  searchStatus: SearchStatus;
   mainUnits: "imperial" | "metric";
   setMainUnits: React.Dispatch<React.SetStateAction<"imperial" | "metric">>;
   SearchLocation: (location: string) => Promise<Result[] | null>;
@@ -21,6 +27,7 @@ export default function WeatherProvider({
 }: {
   children: React.ReactNode;
 }) {
+  const [searchStatus, setSearchStatus] = useState<SearchStatus>("idle");
   const [mainUnits, setMainUnits] = useState<"imperial" | "metric">("metric");
   const [units, setUnits] = useState<Units>({
     temperature: "celsius",
@@ -81,6 +88,7 @@ export default function WeatherProvider({
         mainUnits,
         setMainUnits,
         SearchLocation,
+        searchStatus,
       }}
     >
       {children}
