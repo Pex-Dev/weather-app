@@ -15,7 +15,7 @@ function App() {
       <SearchBar />
       {searchStatus === "no-results" ? (
         <h2 className="text-white text-4xl text-center mt-10">
-          No search result found
+          No search result found!
         </h2>
       ) : (
         <Dashboard />
