@@ -38,3 +38,47 @@ export type SearchStatus =
   | "success"
   | "no-results"
   | "error";
+
+export type Weather = {
+  latitude: number;
+  longitude: number;
+  generationtime_ms: number;
+  utc_offset_seconds: number;
+  timezone: string;
+  timezone_abbreviation: string;
+  elevation: number;
+  current_units: CurrentUnits;
+  current: Current;
+  hourly_units: HourlyUnits;
+  hourly: Hourly;
+};
+
+export type Current = {
+  time: string;
+  interval: number;
+  temperature_2m: number;
+  precipitation: number;
+  weather_code: number;
+  wind_speed_10m: number;
+  relative_humidity_2m: number;
+};
+
+export type CurrentUnits = {
+  time: string;
+  interval: string;
+  temperature_2m: string;
+  precipitation: string;
+  weather_code: string;
+  wind_speed_10m: string;
+  relative_humidity_2m: string;
+};
+
+export type Hourly = {
+  time: string[];
+  temperature_2m: number[];
+};
+
+export type HourlyUnits = {
+  time: string;
+  temperature_2m: string;
+};
