@@ -13,11 +13,19 @@ type WeatherState = {
     unit: "temperature" | "wind" | "precipitation",
     value: "celsius" | "fahrenheit" | "kmh" | "mph" | "mm" | "inch"
   ) => void;
+  weather: Weather | null;
+  setWeather: React.Dispatch<React.SetStateAction<Weather | null>>;
   searchStatus: SearchStatus;
   setSearchStatus: React.Dispatch<React.SetStateAction<SearchStatus>>;
   mainUnits: "imperial" | "metric";
   setMainUnits: React.Dispatch<React.SetStateAction<"imperial" | "metric">>;
   SearchLocation: (location: string) => Promise<Result[] | null>;
+  GetWeather: (
+    name: string,
+    country: string,
+    latitude: number,
+    longitude: number
+  ) => void;
 };
 
 //Crear context
@@ -30,6 +38,7 @@ export default function WeatherProvider({
   children: React.ReactNode;
 }) {
   const [searchStatus, setSearchStatus] = useState<SearchStatus>("idle");
+  const [weather, setWeather] = useState<Weather | null>(null);
   const [mainUnits, setMainUnits] = useState<"imperial" | "metric">("metric");
   const [units, setUnits] = useState<Units>({
     temperature: "celsius",
@@ -82,7 +91,13 @@ export default function WeatherProvider({
     return data.results;
   };
 
-  const GetWeather = async (latitude: number, longitude: number) => {
+  ///////////////////////////////////////////////CAMBIAR A AXIOS
+  const GetWeather = async (
+    name: string,
+    country: string,
+    latitude: number,
+    longitude: number
+  ) => {
     if (searchStatus === "loading") return;
     setSearchStatus("loading");
 
@@ -97,8 +112,9 @@ export default function WeatherProvider({
         units.precipitation
       }`;
       const response = await fetch(url);
-      const weather: Weather = await response.json();
-      console.log(weather);
+      let weather: Weather = await response.json();
+      weather = { ...weather, name, country };
+      setWeather(weather);
       setSearchStatus("success");
     } catch (error) {
       console.error(error);
@@ -106,20 +122,19 @@ export default function WeatherProvider({
     }
   };
 
-  useEffect(() => {
-    GetWeather(-33.4569, -70.6483);
-  }, []);
-
   return (
     <WeatherContext.Provider
       value={{
         units,
         HandleUnitChange,
         mainUnits,
+        weather,
+        setWeather,
         setMainUnits,
         SearchLocation,
         searchStatus,
         setSearchStatus,
+        GetWeather,
       }}
     >
       {children}
