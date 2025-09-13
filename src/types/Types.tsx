@@ -82,3 +82,8 @@ export type HourlyUnits = {
   time: string;
   temperature_2m: string;
 };
+
+export type Location = {
+  city: string;
+  country: string | undefined;
+};
