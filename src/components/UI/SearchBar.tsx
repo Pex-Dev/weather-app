@@ -11,7 +11,7 @@ export default function SearchBar() {
 
   const searchDivRef = useRef<HTMLDivElement>(null);
 
-  const { SearchLocation, setSearchStatus } = UseWeatherContext();
+  const { SearchLocation, setSearchStatus, GetWeather } = UseWeatherContext();
 
   let inputClassName = `bg-ui-main hover:bg-ui-main-hover border-2 border-transparent focus-visible:border-background focus-visible:outline-2 focus-visible:outline-white focus-visible:border-2 transition-colors hover:cursor-pointer w-full rounded-lg text-white text-lg py-3.5`;
   inputClassName += inputText.length > 0 ? " p-3" : " pl-15";
@@ -23,6 +23,7 @@ export default function SearchBar() {
     setInputText(e.target.value);
   };
 
+  //Submit form
   const HandleSubmit = async () => {
     if (inputText.length < 3) return;
     setSearchInProgress(true);
@@ -32,6 +33,18 @@ export default function SearchBar() {
     setSearchInProgress(false);
   };
 
+  //Select a location and get weather
+  const HandleGetWeather = (
+    city: string,
+    country: string,
+    latitude: number,
+    longitude: number
+  ) => {
+    GetWeather(city, country ? country : "", latitude, longitude);
+    setResults(null);
+  };
+
+  //Handle click outside
   useEffect(() => {
     const HandleClickOutside = (e: MouseEvent) => {
       if (searchDivRef && !searchDivRef.current?.contains(e.target as Node)) {
@@ -56,6 +69,7 @@ export default function SearchBar() {
             type="search"
             name="search"
             placeholder="Search for a place..."
+            autoComplete="off"
             value={inputText}
             onChange={(e) => HandleInputChange(e)}
             className={inputClassName}
@@ -84,6 +98,14 @@ export default function SearchBar() {
               results.map((result: Result) => (
                 <li
                   key={result.id}
+                  onClick={() =>
+                    HandleGetWeather(
+                      result.name,
+                      result.country ? result.country : "",
+                      result.latitude,
+                      result.longitude
+                    )
+                  }
                   className="text-white rounded px-2 py-1  hover:bg-ui-main-hover border border-transparent hover:border-ui-main-border cursor-default  "
                 >
                   <p>
