@@ -3,7 +3,7 @@ export default function DetailedInfoCard({
   value,
 }: {
   label: string;
-  value: string;
+  value: string | number;
 }) {
   return (
     <div className="flex flex-col gap-4 bg-ui-main border border-ui-main-border rounded-xl p-4">
