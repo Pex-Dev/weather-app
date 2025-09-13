@@ -40,6 +40,8 @@ export type SearchStatus =
   | "error";
 
 export type Weather = {
+  name: string;
+  country: string;
   latitude: number;
   longitude: number;
   generationtime_ms: number;
@@ -81,9 +83,4 @@ export type Hourly = {
 export type HourlyUnits = {
   time: string;
   temperature_2m: string;
-};
-
-export type Location = {
-  city: string;
-  country: string | undefined;
 };
