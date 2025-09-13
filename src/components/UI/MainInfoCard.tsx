@@ -1,26 +1,59 @@
 import iconSunny from "../../assets/images/icon-sunny.webp";
+import { UseWeatherContext } from "../../context/WeatherAppContext";
 
 export default function MainInfoCard() {
-  return (
-    <div className="py-12 md:px-5 flex flex-col md:flex-row md:items-center md:justify-between gap-9 bg-[url('/images/bg-today-small.svg')] md:bg-[url('/images/bg-today-large.svg')]  bg-no-repeat bg-cover  rounded-3xl overflow-hidden">
-      <div className="flex flex-col gap-2">
-        <h2 className="text-white text-center text-2xl font-semibold">
-          Berlin, Germany
-        </h2>
-        <p className="text-neutral-200 text-center md:text-left">
-          Tuesday, Aug 5, 2025
-        </p>
+  const { weather, searchStatus } = UseWeatherContext();
+
+  const DateFormater = (rawDate: string): string => {
+    const date = new Date(rawDate);
+    return date.toLocaleDateString("en-US", {
+      weekday: "long",
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    });
+  };
+
+  if (searchStatus === "success" && weather) {
+    return (
+      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-9 rounded-3xl overflow-hidden py-12 md:px-5 bg-[url('/images/bg-today-small.svg')] md:bg-[url('/images/bg-today-large.svg')]  bg-no-repeat bg-cover">
+        <div className="flex flex-col gap-2">
+          <h2 className="text-white text-center text-2xl font-semibold">
+            {`${weather.name}, ${weather.country}`}
+          </h2>
+          <p className="text-neutral-200 text-center md:text-left">
+            {DateFormater(weather.current.time)}
+          </p>
+        </div>
+        <div className="flex items-center gap-2 mx-auto md:mx-0">
+          <img
+            src={iconSunny}
+            alt="Icon sunny"
+            className="max-w-30 md:max-w-32"
+          />
+          <p className="text-8xl font-bold text-white italic">
+            {Math.round(weather.current.temperature_2m)}
+            <span className="not-italic"> °</span>
+          </p>
+        </div>
       </div>
-      <div className="flex items-center gap-2 mx-auto md:mx-0">
-        <img
-          src={iconSunny}
-          alt="Icon sunny"
-          className="max-w-30 md:max-w-32"
-        />
-        <p className="text-8xl font-bold text-white italic">
-          68<span className="not-italic"> °</span>
-        </p>
+    );
+  }
+
+  if (searchStatus === "loading") {
+    return (
+      <div className="flex flex-col items-center justify-center gap-9 rounded-3xl overflow-hidden  bg-ui-main h-[316px] md:h-[224px]">
+        <div className="flex flex-col gap-2 justify-center items-center">
+          <div className="animation-jump-container flex gap-2 w-fit">
+            <span className="animation-jump block w-2 h-2 bg-white rounded-full"></span>
+            <span className="animation-jump block w-2 h-2 bg-white rounded-full"></span>
+            <span className="animation-jump block w-2 h-2 bg-white rounded-full"></span>
+          </div>
+          <p className="text-neutral-300">Loading...</p>
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
+
+  return null;
 }
