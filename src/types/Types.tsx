@@ -102,3 +102,13 @@ export type HourlyUnits = {
   time: string;
   temperature_2m: string;
 };
+
+export type WeatherCode = {
+  name: string;
+  icons: Icons;
+};
+
+export type Icons = {
+  day: string;
+  night: string;
+};
