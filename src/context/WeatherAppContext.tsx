@@ -106,7 +106,7 @@ export default function WeatherProvider({
         latitude
       )}&longitude=${encodeURIComponent(
         longitude
-      )}&hourly=temperature_2m&current=temperature_2m,precipitation,weather_code,wind_speed_10m,relative_humidity_2m,apparent_temperature,relative_humidity_2m&timezone=auto&wind_speed_unit=${
+      )}&daily=weather_code,temperature_2m_min,temperature_2m_max&hourly=temperature_2m&current=temperature_2m,precipitation,weather_code,wind_speed_10m,relative_humidity_2m,apparent_temperature,relative_humidity_2m&timezone=auto&wind_speed_unit=${
         units.wind
       }&temperature_unit=${units.temperature}&precipitation_unit=${
         units.precipitation
