@@ -53,6 +53,8 @@ export type Weather = {
   current: Current;
   hourly_units: HourlyUnits;
   hourly: Hourly;
+  daily_units: DailyUnits;
+  daily: Daily;
 };
 
 export type Current = {
@@ -63,6 +65,7 @@ export type Current = {
   weather_code: number;
   wind_speed_10m: number;
   relative_humidity_2m: number;
+  apparent_temperature: number;
 };
 
 export type CurrentUnits = {
@@ -73,6 +76,21 @@ export type CurrentUnits = {
   weather_code: string;
   wind_speed_10m: string;
   relative_humidity_2m: string;
+  apparent_temperature: string;
+};
+
+export type Daily = {
+  time: Date[];
+  weather_code: number[];
+  temperature_2m_min: number[];
+  temperature_2m_max: number[];
+};
+
+export type DailyUnits = {
+  time: string;
+  weather_code: string;
+  temperature_2m_min: string;
+  temperature_2m_max: string;
 };
 
 export type Hourly = {
