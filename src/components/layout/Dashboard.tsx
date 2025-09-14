@@ -8,6 +8,12 @@ import { UseWeatherContext } from "../../context/WeatherAppContext";
 export default function Dashboard() {
   const { weather, searchStatus, units } = UseWeatherContext();
 
+  const DateFormater = (rawDate: Date): string => {
+    return new Date(rawDate).toLocaleDateString("en-US", {
+      weekday: "short",
+    });
+  };
+
   if (searchStatus === "error" || searchStatus === "idle") return;
 
   return (
@@ -61,13 +67,14 @@ export default function Dashboard() {
 
         <h3 className="text-white text-xl font-light mt-3">Daily Forecast</h3>
         <div className="grid grid-cols-3 md:grid-cols-7 gap-4">
-          <DailyForecastCard day="Tue" icon="sunny" max={20} min={14} />
-          <DailyForecastCard day="Tue" icon="partlyCloudy" max={20} min={14} />
-          <DailyForecastCard day="Tue" icon="stormy" max={20} min={14} />
-          <DailyForecastCard day="Tue" max={20} min={14} />
-          <DailyForecastCard day="Tue" icon="cloudy" max={20} min={14} />
-          <DailyForecastCard day="Tue" icon="partlyCloudy" max={20} min={14} />
-          <DailyForecastCard day="Tue" icon="rainy" max={20} min={14} />
+          {weather?.daily.time.map((time, i) => (
+            <DailyForecastCard
+              day={DateFormater(time)}
+              weatherCode={weather ? weather.daily.weather_code[i] : 0}
+              max={weather ? weather.daily.temperature_2m_max[i] : 0}
+              min={weather ? weather.daily.temperature_2m_min[i] : 0}
+            />
+          ))}
         </div>
       </div>
       <div className="w-full lg:max-w-[345px] bg-ui-main rounded-2xl lg:rounded-3xl py-4 pl-4 mt-4 md:mt-0 max-h-[602px] overflow-hidden">
