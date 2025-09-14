@@ -1,4 +1,4 @@
-import iconSunny from "../../assets/images/icon-sunny.webp";
+import { WeatherCodes } from "../../utilities/Utilities";
 import { UseWeatherContext } from "../../context/WeatherAppContext";
 
 export default function MainInfoCard() {
@@ -25,13 +25,15 @@ export default function MainInfoCard() {
             {DateFormater(weather.current.time)}
           </p>
         </div>
-        <div className="flex items-center gap-2 mx-auto md:mx-0">
+        <div className="flex items-center gap-2 mx-auto md:mx-0 min-w-[280px] md:min-w-[320px] ">
           <img
-            src={iconSunny}
+            src={`/images/weather_icons/${
+              WeatherCodes[weather.current.weather_code].icons.day
+            }`}
             alt="Icon sunny"
-            className="max-w-30 md:max-w-32"
+            className="max-w-30 md:max-w-32 shrink-0"
           />
-          <p className="text-8xl font-bold text-white italic">
+          <p className="text-7xl md:text-8xl font-bold text-white italic ">
             {Math.round(weather.current.temperature_2m)}
             <span className="not-italic"> °</span>
           </p>
