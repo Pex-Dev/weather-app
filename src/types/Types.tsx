@@ -96,6 +96,7 @@ export type DailyUnits = {
 export type Hourly = {
   time: string[];
   temperature_2m: number[];
+  weather_code: number[];
 };
 
 export type HourlyUnits = {
