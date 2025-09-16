@@ -16,7 +16,7 @@ export default function SearchBar() {
   let inputClassName = `bg-ui-main hover:bg-ui-main-hover border-2 border-transparent focus-visible:border-background focus-visible:outline-2 focus-visible:outline-white focus-visible:border-2 transition-colors hover:cursor-pointer w-full rounded-lg text-white text-lg py-3.5`;
   inputClassName += inputText.length > 0 ? " p-3" : " pl-15";
 
-  const HandleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.value.length === 0) {
       setResults(null);
     }
@@ -24,7 +24,7 @@ export default function SearchBar() {
   };
 
   //Submit form
-  const HandleSubmit = async () => {
+  const handleSubmit = async () => {
     if (inputText.length < 3) return;
     setSearchInProgress(true);
     const results: Result[] | null = await SearchLocation(inputText);
@@ -34,7 +34,7 @@ export default function SearchBar() {
   };
 
   //Select a location and get weather
-  const HandleGetWeather = (
+  const handleGetWeather = (
     city: string,
     country: string,
     latitude: number,
@@ -53,13 +53,14 @@ export default function SearchBar() {
     };
 
     window.addEventListener("mousedown", HandleClickOutside);
+    () => window.removeEventListener("mousedown", HandleClickOutside);
   }, [results]);
 
   return (
     <form
       onSubmit={(e) => {
         e.preventDefault();
-        HandleSubmit();
+        handleSubmit();
       }}
       className="flex flex-col md:flex-row gap-3 w-full max-w-[670px] mx-auto mt-15"
     >
@@ -71,7 +72,7 @@ export default function SearchBar() {
             placeholder="Search for a place..."
             autoComplete="off"
             value={inputText}
-            onChange={(e) => HandleInputChange(e)}
+            onChange={(e) => handleInputChange(e)}
             className={inputClassName}
           />
           {inputText.length < 1 && (
@@ -99,7 +100,7 @@ export default function SearchBar() {
                 <li
                   key={result.id}
                   onClick={() =>
-                    HandleGetWeather(
+                    handleGetWeather(
                       result.name,
                       result.country ? result.country : "",
                       result.latitude,
