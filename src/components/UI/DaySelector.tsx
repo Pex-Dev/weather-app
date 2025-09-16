@@ -10,7 +10,7 @@ export default function DaySelector({
   selectedDay?: Date;
   setSelectedDay?: React.Dispatch<React.SetStateAction<Date | null>>;
 }) {
-  const [showDropdown, setShowDropdown] = useState<Boolean>(false);
+  const [showDropdown, setShowDropdown] = useState<boolean>(false);
   const daysDiv = useRef<HTMLDivElement>(null);
 
   //Close menu when click outside
@@ -22,6 +22,7 @@ export default function DaySelector({
     };
 
     window.addEventListener("mousedown", HandleClickOutside);
+    return () => window.removeEventListener("mousedown", HandleClickOutside);
   }, [showDropdown]);
 
   const DateFormater = (rawDate: Date): string => {
