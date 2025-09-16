@@ -9,13 +9,14 @@ export default function UnitsSelector() {
 
   //Close menu when click outside
   useEffect(() => {
-    const HandleClickOutside = (e: MouseEvent) => {
+    const handleClickOutside = (e: MouseEvent) => {
       if (unitsDiv && !unitsDiv.current?.contains(e.target as Node)) {
         setShowDropdown(false);
       }
     };
 
-    window.addEventListener("mousedown", HandleClickOutside);
+    window.addEventListener("mousedown", handleClickOutside);
+    () => window.removeEventListener("mousedown", handleClickOutside);
   }, [showDropdown]);
 
   return (
