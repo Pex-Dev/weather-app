@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { saveUnits, getUnits } from "../utilities/Utilities";
 import type {
   Units,
@@ -42,6 +42,17 @@ export default function WeatherProvider({
   const [weather, setWeather] = useState<Weather | null>(null);
   const [mainUnits, setMainUnits] = useState<"imperial" | "metric">("metric");
   const [units, setUnits] = useState<Units>(getUnits());
+
+  //Get weather again when the units change
+  useEffect(() => {
+    if (searchStatus !== "success" || !weather) return;
+    GetWeather(
+      weather.name,
+      weather.country,
+      weather.latitude,
+      weather.longitude
+    );
+  }, [units]);
 
   const handleMainUnitsChange = (newMainUnits: "imperial" | "metric") => {
     const newUnits: Units = {
