@@ -64,7 +64,10 @@ export default function DaySelector({
       {showDropdown && days && setSelectedDay && (
         <div className="absolute mt-3 right-0 bg-ui-main border border-ui-main-border rounded-md md:rounded-xl p-2 min-w-[212px] z-10 shadow-2xl">
           {removeDuplicates(days).map((day) => (
-            <label className="block w-full px-2 py-1 rounded md:rounded-md text-white font-extralight hover:bg-ui-main-hover">
+            <label
+              key={day.toISOString()}
+              className="block w-full px-2 py-1 rounded md:rounded-md text-white font-extralight hover:bg-ui-main-hover"
+            >
               {dateFormater(new Date(day))}
               <input
                 type="radio"
