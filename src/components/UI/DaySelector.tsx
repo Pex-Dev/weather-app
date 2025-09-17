@@ -34,7 +34,7 @@ export default function DaySelector({
   const removeDuplicates = (dates: string[]) => {
     const days: number[] = [];
     const fixedDates: Date[] = [];
-    dates.map((date) => {
+    dates.forEach((date) => {
       if (!days.includes(new Date(date).getDate())) {
         days.push(new Date(date).getDate());
         fixedDates.push(new Date(date));
