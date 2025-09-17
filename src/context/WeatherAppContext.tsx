@@ -1,4 +1,5 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useState } from "react";
+import { saveUnits, getUnits } from "../utilities/Utilities";
 import type {
   Units,
   SearchResults,
@@ -18,7 +19,7 @@ type WeatherState = {
   searchStatus: SearchStatus;
   setSearchStatus: React.Dispatch<React.SetStateAction<SearchStatus>>;
   mainUnits: "imperial" | "metric";
-  setMainUnits: React.Dispatch<React.SetStateAction<"imperial" | "metric">>;
+  handleMainUnitsChange: (units: "imperial" | "metric") => void;
   SearchLocation: (location: string) => Promise<Result[] | null>;
   GetWeather: (
     name: string,
@@ -40,19 +41,18 @@ export default function WeatherProvider({
   const [searchStatus, setSearchStatus] = useState<SearchStatus>("idle");
   const [weather, setWeather] = useState<Weather | null>(null);
   const [mainUnits, setMainUnits] = useState<"imperial" | "metric">("metric");
-  const [units, setUnits] = useState<Units>({
-    temperature: "celsius",
-    wind: "kmh",
-    precipitation: "mm",
-  });
+  const [units, setUnits] = useState<Units>(getUnits());
 
-  useEffect(() => {
-    setUnits({
-      temperature: mainUnits === "metric" ? "celsius" : "fahrenheit",
-      wind: mainUnits === "metric" ? "kmh" : "mph",
-      precipitation: mainUnits === "metric" ? "mm" : "inch",
-    });
-  }, [mainUnits]);
+  const handleMainUnitsChange = (newMainUnits: "imperial" | "metric") => {
+    const newUnits: Units = {
+      temperature: newMainUnits === "metric" ? "celsius" : "fahrenheit",
+      wind: newMainUnits === "metric" ? "kmh" : "mph",
+      precipitation: newMainUnits === "metric" ? "mm" : "inch",
+    };
+    setMainUnits(newMainUnits);
+    setUnits(newUnits);
+    saveUnits(newUnits);
+  };
 
   const HandleUnitChange = (
     unit: "temperature" | "wind" | "precipitation",
@@ -75,7 +75,7 @@ export default function WeatherProvider({
             ? value
             : prevUnits.precipitation,
       };
-
+      saveUnits(newUnits);
       return newUnits;
     });
   };
@@ -130,7 +130,7 @@ export default function WeatherProvider({
         mainUnits,
         weather,
         setWeather,
-        setMainUnits,
+        handleMainUnitsChange,
         SearchLocation,
         searchStatus,
         setSearchStatus,
