@@ -1,4 +1,4 @@
-import type { WeatherCode } from "../types/Types";
+import type { Units, WeatherCode } from "../types/Types";
 
 export const WeatherCodes: Record<number, WeatherCode> = {
   0: {
@@ -197,4 +197,22 @@ export const WeatherCodes: Record<number, WeatherCode> = {
       night: "heavy-hail.svg",
     },
   },
+};
+
+export const saveUnits = (units: Units) => {
+  localStorage.setItem("units", JSON.stringify(units));
+};
+
+export const getUnits = (): Units => {
+  const units = localStorage.getItem("units");
+
+  if (!units) {
+    return {
+      temperature: "celsius",
+      wind: "kmh",
+      precipitation: "mm",
+    };
+  }
+
+  return JSON.parse(units);
 };
