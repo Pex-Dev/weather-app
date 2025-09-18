@@ -10,7 +10,7 @@ import type {
 
 type WeatherState = {
   units: Units;
-  HandleUnitChange: (
+  handleUnitChange: (
     unit: "temperature" | "wind" | "precipitation",
     value: "celsius" | "fahrenheit" | "kmh" | "mph" | "mm" | "inch"
   ) => void;
@@ -20,8 +20,8 @@ type WeatherState = {
   setSearchStatus: React.Dispatch<React.SetStateAction<SearchStatus>>;
   mainUnits: "imperial" | "metric";
   handleMainUnitsChange: (units: "imperial" | "metric") => void;
-  SearchLocation: (location: string) => Promise<Result[] | null>;
-  GetWeather: (
+  searchLocation: (location: string) => Promise<Result[] | null>;
+  getWeather: (
     name: string,
     country: string,
     latitude: number,
@@ -46,7 +46,7 @@ export default function WeatherProvider({
   //Get weather again when the units change
   useEffect(() => {
     if (searchStatus !== "success" || !weather) return;
-    GetWeather(
+    getWeather(
       weather.name,
       weather.country,
       weather.latitude,
@@ -65,7 +65,7 @@ export default function WeatherProvider({
     saveUnits(newUnits);
   };
 
-  const HandleUnitChange = (
+  const handleUnitChange = (
     unit: "temperature" | "wind" | "precipitation",
     value: "celsius" | "fahrenheit" | "kmh" | "mph" | "mm" | "inch"
   ) => {
@@ -91,7 +91,7 @@ export default function WeatherProvider({
     });
   };
 
-  const SearchLocation = async (location: string): Promise<Result[] | null> => {
+  const searchLocation = async (location: string): Promise<Result[] | null> => {
     const url = `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(
       location
     )}&count=10&language=en&format=json`;
@@ -103,7 +103,7 @@ export default function WeatherProvider({
   };
 
   ///////////////////////////////////////////////CAMBIAR A AXIOS
-  const GetWeather = async (
+  const getWeather = async (
     name: string,
     country: string,
     latitude: number,
@@ -137,15 +137,15 @@ export default function WeatherProvider({
     <WeatherContext.Provider
       value={{
         units,
-        HandleUnitChange,
+        handleUnitChange,
         mainUnits,
         weather,
         setWeather,
         handleMainUnitsChange,
-        SearchLocation,
+        searchLocation,
         searchStatus,
         setSearchStatus,
-        GetWeather,
+        getWeather,
       }}
     >
       {children}

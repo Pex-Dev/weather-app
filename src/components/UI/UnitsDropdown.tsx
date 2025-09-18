@@ -2,7 +2,7 @@ import { UseWeatherContext } from "../../context/WeatherAppContext";
 import UnitLabel from "./UnitLabel";
 
 export default function UnitsDropdown() {
-  const { units, HandleUnitChange, mainUnits, handleMainUnitsChange } =
+  const { units, handleUnitChange, mainUnits, handleMainUnitsChange } =
     UseWeatherContext();
 
   return (
@@ -24,14 +24,14 @@ export default function UnitsDropdown() {
           name="temperature"
           value="celsius"
           selected={units.temperature == "celsius"}
-          onClick={() => HandleUnitChange("temperature", "celsius")}
+          onClick={() => handleUnitChange("temperature", "celsius")}
         />
         <UnitLabel
           label="Fahrenheit (°F)"
           name="temperature"
           value="fahrenheit"
           selected={units.temperature == "fahrenheit"}
-          onClick={() => HandleUnitChange("temperature", "fahrenheit")}
+          onClick={() => handleUnitChange("temperature", "fahrenheit")}
         />
       </div>
       <hr className="text-gray-700 h-[1px] my-2" />
@@ -42,14 +42,14 @@ export default function UnitsDropdown() {
           name="wind"
           value="kmh"
           selected={units.wind == "kmh"}
-          onClick={() => HandleUnitChange("wind", "kmh")}
+          onClick={() => handleUnitChange("wind", "kmh")}
         />
         <UnitLabel
           label="mph"
           name="wind"
           value="mph"
           selected={units.wind == "mph"}
-          onClick={() => HandleUnitChange("wind", "mph")}
+          onClick={() => handleUnitChange("wind", "mph")}
         />
       </div>
       <hr className="text-gray-700 h-[1px] my-2" />
@@ -60,14 +60,14 @@ export default function UnitsDropdown() {
           name="precipitation"
           value="mm"
           selected={units.precipitation == "mm"}
-          onClick={() => HandleUnitChange("precipitation", "mm")}
+          onClick={() => handleUnitChange("precipitation", "mm")}
         />
         <UnitLabel
           label="Inches (in)"
           name="precipitation"
           value="inch"
           selected={units.precipitation == "inch"}
-          onClick={() => HandleUnitChange("precipitation", "inch")}
+          onClick={() => handleUnitChange("precipitation", "inch")}
         />
       </div>
     </div>
