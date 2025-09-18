@@ -15,6 +15,7 @@ export default function UnitsSelector() {
       }
     };
 
+    //Remove event listener when the component dismount
     window.addEventListener("mousedown", handleClickOutside);
     () => window.removeEventListener("mousedown", handleClickOutside);
   }, [showDropdown]);
