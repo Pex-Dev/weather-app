@@ -29,10 +29,10 @@ type WeatherState = {
   ) => void;
 };
 
-//Crear context
+//create context
 const WeatherContext = createContext<WeatherState | null>(null);
 
-//Crear provider
+//create provider
 export default function WeatherProvider({
   children,
 }: {
@@ -62,6 +62,8 @@ export default function WeatherProvider({
     };
     setMainUnits(newMainUnits);
     setUnits(newUnits);
+
+    //Save in localStorage
     saveUnits(newUnits);
   };
 
@@ -86,6 +88,7 @@ export default function WeatherProvider({
             ? value
             : prevUnits.precipitation,
       };
+      //Save in localStorage
       saveUnits(newUnits);
       return newUnits;
     });
