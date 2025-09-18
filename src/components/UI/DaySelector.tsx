@@ -34,6 +34,8 @@ export default function DaySelector({
   const removeDuplicates = (dates: string[]) => {
     const days: number[] = [];
     const fixedDates: Date[] = [];
+
+    //Add only the days that do no repeat
     dates.forEach((date) => {
       if (!days.includes(new Date(date).getDate())) {
         days.push(new Date(date).getDate());
