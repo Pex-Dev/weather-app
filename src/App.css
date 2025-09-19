@@ -25,6 +25,16 @@
   }
 }
 
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #313050;
+  border-radius: 5px;
+  border: 1px solid #343253;
+}
+
 .animation-jump-container .animation-jump:nth-child(1) {
   animation: jumping 1s ease-in infinite -0.6s;
 }
