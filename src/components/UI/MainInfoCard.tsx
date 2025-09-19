@@ -1,4 +1,4 @@
-import { WeatherCodes } from "../../utilities/Utilities";
+import { getCorrectIcon } from "../../utilities/Utilities";
 import { UseWeatherContext } from "../../context/WeatherAppContext";
 
 export default function MainInfoCard() {
@@ -27,9 +27,10 @@ export default function MainInfoCard() {
         </div>
         <div className="flex items-center gap-2 mx-auto md:mx-0 min-w-[280px] md:min-w-[320px] ">
           <img
-            src={`/images/weather_icons/${
-              WeatherCodes[weather.current.weather_code].icons.day
-            }`}
+            src={getCorrectIcon(
+              weather.current.weather_code,
+              weather.current.time
+            )}
             alt="Icon sunny"
             className="max-w-30 md:max-w-32 shrink-0"
           />
