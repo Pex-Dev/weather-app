@@ -97,23 +97,24 @@ export default function SearchBar() {
           <ul className="flex flex-col gap-3 absolute mt-3 bg-ui-main rounded-lg p-2 w-full shadow-2xl">
             {results.length > 0 ? (
               results.map((result: Result) => (
-                <li
-                  key={result.id}
-                  onClick={() =>
-                    handlegetWeather(
-                      result.name,
-                      result.country ? result.country : "",
-                      result.latitude,
-                      result.longitude
-                    )
-                  }
-                  className="text-white rounded px-2 py-1  hover:bg-ui-main-hover border border-transparent hover:border-ui-main-border cursor-default  "
-                >
-                  <p>
-                    {result.name}
-                    <span>{result.admin1 ? `, ${result.admin1}` : ""}</span>
-                    <span>{result.country ? `, ${result.country}` : ""}</span>
-                  </p>
+                <li key={result.id}>
+                  <button
+                    onClick={() =>
+                      handlegetWeather(
+                        result.name,
+                        result.country ? result.country : "",
+                        result.latitude,
+                        result.longitude
+                      )
+                    }
+                    className="w-full text-left text-white rounded px-2 py-1  hover:bg-ui-main-hover border border-transparent hover:border-ui-main-border cursor-default focus:bg-ui-main-hover focus:border-ui-main-border focus:outline-0"
+                  >
+                    <p>
+                      {result.name}
+                      <span>{result.admin1 ? `, ${result.admin1}` : ""}</span>
+                      <span>{result.country ? `, ${result.country}` : ""}</span>
+                    </p>
+                  </button>
                 </li>
               ))
             ) : (
