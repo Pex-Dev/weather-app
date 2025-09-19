@@ -1,3 +1,4 @@
+import { getCorrectIcon } from "../../utilities/Utilities";
 import { WeatherCodes } from "../../utilities/Utilities";
 
 export default function HourlyForecastCard({
@@ -13,7 +14,7 @@ export default function HourlyForecastCard({
     <li className="w-full pr-3 rounded-lg bg-ui-main-hover border border-ui-main-border flex justify-between items-center">
       <div className="flex items-center gap-2">
         <img
-          src={`/images/weather_icons/${WeatherCodes[weatherCode].icons.day}`}
+          src={getCorrectIcon(weatherCode, time)}
           alt={WeatherCodes[weatherCode].name}
           className="max-w-13 "
         />
