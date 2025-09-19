@@ -29,7 +29,7 @@ export default function MainInfoCard() {
           <img
             src={getCorrectIcon(
               weather.current.weather_code,
-              weather.current.time
+              new Date(weather.current.time).getHours()
             )}
             alt="Icon sunny"
             className="max-w-30 md:max-w-32 shrink-0"
