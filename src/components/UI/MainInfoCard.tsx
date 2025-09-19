@@ -4,7 +4,7 @@ import { UseWeatherContext } from "../../context/WeatherAppContext";
 export default function MainInfoCard() {
   const { weather, searchStatus } = UseWeatherContext();
 
-  const DateFormater = (rawDate: string): string => {
+  const dateFormater = (rawDate: string): string => {
     const date = new Date(rawDate);
     return date.toLocaleDateString("en-US", {
       weekday: "long",
@@ -22,7 +22,7 @@ export default function MainInfoCard() {
             {`${weather.name}, ${weather.country}`}
           </h2>
           <p className="text-neutral-200 text-center md:text-left">
-            {DateFormater(weather.current.time)}
+            {dateFormater(weather.current.time)}
           </p>
         </div>
         <div className="flex items-center gap-2 mx-auto md:mx-0 min-w-[280px] md:min-w-[320px] ">
