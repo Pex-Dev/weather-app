@@ -217,11 +217,7 @@ export const getUnits = (): Units => {
   return JSON.parse(units);
 };
 
-export const getCorrectIcon = (
-  weatherCode: number,
-  time: string | Date
-): string => {
-  const hour = new Date(time).getHours();
+export const getCorrectIcon = (weatherCode: number, hour: number): string => {
   if (hour >= 6 && hour < 18) {
     return `/images/weather_icons/${WeatherCodes[weatherCode].icons.day}`;
   } else {
