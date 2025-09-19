@@ -7,6 +7,7 @@ import type {
   SearchStatus,
   Weather,
 } from "../types/Types";
+import axios from "axios";
 
 type WeatherState = {
   units: Units;
@@ -95,14 +96,20 @@ export default function WeatherProvider({
   };
 
   const searchLocation = async (location: string): Promise<Result[] | null> => {
-    const url = `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(
-      location
-    )}&count=10&language=en&format=json`;
+    try {
+      const url = `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(
+        location
+      )}&count=10&language=en&format=json`;
 
-    const response = await fetch(url);
-    const data: SearchResults = await response.json();
-    if (!data.results) return null;
-    return data.results;
+      const response = await axios.get(url);
+      const data: SearchResults = response.data;
+      if (!data.results) return null;
+      return data.results;
+    } catch (error) {
+      console.error(error);
+      setSearchStatus("error");
+    }
+    return null;
   };
 
   ///////////////////////////////////////////////CAMBIAR A AXIOS
@@ -125,8 +132,8 @@ export default function WeatherProvider({
       }&temperature_unit=${units.temperature}&precipitation_unit=${
         units.precipitation
       }`;
-      const response = await fetch(url);
-      let weather: Weather = await response.json();
+      const response = await axios.get(url);
+      let weather: Weather = response.data;
       weather = { ...weather, name, country };
       setWeather(weather);
       setSearchStatus("success");
