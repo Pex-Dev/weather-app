@@ -112,7 +112,6 @@ export default function WeatherProvider({
     return null;
   };
 
-  ///////////////////////////////////////////////CAMBIAR A AXIOS
   const getWeather = async (
     name: string,
     country: string,
