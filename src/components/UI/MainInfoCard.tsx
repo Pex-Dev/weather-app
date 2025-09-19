@@ -18,7 +18,7 @@ export default function MainInfoCard() {
     return (
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-9 rounded-3xl overflow-hidden py-12 md:px-5 bg-[url('/images/bg-today-small.svg')] md:bg-[url('/images/bg-today-large.svg')]  bg-no-repeat bg-cover">
         <div className="flex flex-col gap-2">
-          <h2 className="text-white text-center text-2xl font-semibold">
+          <h2 className="text-white text-center md:text-left text-2xl font-semibold">
             {`${weather.name}, ${weather.country}`}
           </h2>
           <p className="text-neutral-200 text-center md:text-left">
