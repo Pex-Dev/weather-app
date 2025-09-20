@@ -29,7 +29,7 @@ type WeatherState = {
     latitude: number,
     longitude: number
   ) => void;
-  getCurrentLocation: () => void;
+  tryAgain: () => void;
 };
 
 //create context
@@ -111,7 +111,7 @@ export default function WeatherProvider({
       return data.results;
     } catch (error) {
       console.error(error);
-      setSearchStatus("error");
+      setSearchStatus("idle");
     }
     return null;
   };
@@ -167,7 +167,7 @@ export default function WeatherProvider({
       );
     } catch (error) {
       console.error(error);
-      setSearchStatus("error");
+      setSearchStatus("idle");
     }
   };
 
@@ -177,6 +177,17 @@ export default function WeatherProvider({
     } else {
       console.log("Geolocation is not supported by this browser.");
     }
+  };
+
+  // Retry fetching weather data when in error state
+  const tryAgain = () => {
+    if (!weather) return;
+    getWeather(
+      weather.name,
+      weather.country,
+      weather.latitude,
+      weather.longitude
+    );
   };
 
   //Get current location on load
@@ -197,7 +208,7 @@ export default function WeatherProvider({
         searchStatus,
         setSearchStatus,
         getWeather,
-        getCurrentLocation,
+        tryAgain,
       }}
     >
       {children}
