@@ -6,6 +6,7 @@ import type {
   Result,
   SearchStatus,
   Weather,
+  ReverseGeocoding,
 } from "../types/Types";
 import axios from "axios";
 
@@ -28,6 +29,7 @@ type WeatherState = {
     latitude: number,
     longitude: number
   ) => void;
+  getCurrentLocation: () => void;
 };
 
 //create context
@@ -43,6 +45,8 @@ export default function WeatherProvider({
   const [weather, setWeather] = useState<Weather | null>(null);
   const [mainUnits, setMainUnits] = useState<"imperial" | "metric">("metric");
   const [units, setUnits] = useState<Units>(getUnits());
+
+  const isGeolocationSupported: boolean = "geolocation" in navigator;
 
   //Get weather again when the units change
   useEffect(() => {
@@ -116,10 +120,13 @@ export default function WeatherProvider({
     name: string,
     country: string,
     latitude: number,
-    longitude: number
+    longitude: number,
+    startLoading: boolean = false
   ) => {
-    if (searchStatus === "loading") return;
-    setSearchStatus("loading");
+    if (!startLoading) {
+      if (searchStatus === "loading") return;
+      setSearchStatus("loading");
+    }
 
     try {
       const url = `https://api.open-meteo.com/v1/forecast?latitude=${encodeURIComponent(
@@ -142,6 +149,41 @@ export default function WeatherProvider({
     }
   };
 
+  const currentPosition = async (position: GeolocationPosition) => {
+    setSearchStatus("loading");
+    try {
+      const { latitude, longitude } = position.coords;
+      const response = await axios.get(
+        `https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json&accept-language=en`
+      );
+
+      const location: ReverseGeocoding = response.data;
+      getWeather(
+        location.address.city,
+        location.address.country,
+        latitude,
+        longitude,
+        true
+      );
+    } catch (error) {
+      console.error(error);
+      setSearchStatus("error");
+    }
+  };
+
+  const getCurrentLocation = () => {
+    if (isGeolocationSupported) {
+      navigator.geolocation.getCurrentPosition(currentPosition);
+    } else {
+      console.log("Geolocation is not supported by this browser.");
+    }
+  };
+
+  //Get current location on load
+  useEffect(() => {
+    getCurrentLocation();
+  }, []);
+
   return (
     <WeatherContext.Provider
       value={{
@@ -155,6 +197,7 @@ export default function WeatherProvider({
         searchStatus,
         setSearchStatus,
         getWeather,
+        getCurrentLocation,
       }}
     >
       {children}
