@@ -41,6 +41,12 @@ export default function WeatherProvider({
 }: {
   children: React.ReactNode;
 }) {
+  const [searchData, setSearchData] = useState<{
+    name: string;
+    country: string;
+    latitude: number;
+    longitude: number;
+  } | null>(null);
   const [searchStatus, setSearchStatus] = useState<SearchStatus>("idle");
   const [weather, setWeather] = useState<Weather | null>(null);
   const [mainUnits, setMainUnits] = useState<"imperial" | "metric">("metric");
@@ -128,6 +134,9 @@ export default function WeatherProvider({
       setSearchStatus("loading");
     }
 
+    //Save search data to use in case of retry
+    setSearchData({ name, country, latitude, longitude });
+
     try {
       const url = `https://api.open-meteo.com/v1/forecast?latitude=${encodeURIComponent(
         latitude
@@ -181,12 +190,12 @@ export default function WeatherProvider({
 
   // Retry fetching weather data when in error state
   const tryAgain = () => {
-    if (!weather) return;
+    if (!searchData) return;
     getWeather(
-      weather.name,
-      weather.country,
-      weather.latitude,
-      weather.longitude
+      searchData.name,
+      searchData.country,
+      searchData.latitude,
+      searchData.longitude
     );
   };
 
