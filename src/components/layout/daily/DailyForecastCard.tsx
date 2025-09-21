@@ -1,4 +1,4 @@
-import { WeatherCodes } from "../../utilities/Utilities";
+import { WeatherCodes } from "../../../utilities/Utilities";
 
 export default function DailyForecastCard({
   day,

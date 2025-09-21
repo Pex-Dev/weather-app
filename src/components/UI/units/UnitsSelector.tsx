@@ -1,5 +1,5 @@
-import iconUnits from "../../assets/images/icon-units.svg";
-import iconDropdown from "../../assets/images/icon-dropdown.svg";
+import iconUnits from "../../../assets/images/icon-units.svg";
+import iconDropdown from "../../../assets/images/icon-dropdown.svg";
 import UnitsDropdown from "./UnitsDropdown";
 import { useEffect, useRef, useState } from "react";
 

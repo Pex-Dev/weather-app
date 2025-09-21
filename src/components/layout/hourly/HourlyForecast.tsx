@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
-import { UseWeatherContext } from "../../context/WeatherAppContext";
-import DaySelector from "../UI/DaySelector";
-import HourlyForecastCard from "../UI/HourlyForecastCard";
+import { UseWeatherContext } from "../../../context/WeatherAppContext";
+import DaySelector from "../../UI/DaySelector";
+import HourlyForecastCard from "./HourlyForecastCard";
 
 export default function HourlyForecast() {
   const { weather, searchStatus } = UseWeatherContext();

@@ -1,5 +1,4 @@
-import { getCorrectIcon } from "../../utilities/Utilities";
-import { WeatherCodes } from "../../utilities/Utilities";
+import { getCorrectIcon, WeatherCodes } from "../../../utilities/Utilities";
 
 export default function HourlyForecastCard({
   weatherCode,

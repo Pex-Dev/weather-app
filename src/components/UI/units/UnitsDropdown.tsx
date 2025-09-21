@@ -1,4 +1,4 @@
-import { UseWeatherContext } from "../../context/WeatherAppContext";
+import { UseWeatherContext } from "../../../context/WeatherAppContext";
 import UnitLabel from "./UnitLabel";
 
 export default function UnitsDropdown() {

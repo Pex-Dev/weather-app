@@ -1,5 +1,5 @@
-import { getCorrectIcon } from "../../utilities/Utilities";
-import { UseWeatherContext } from "../../context/WeatherAppContext";
+import { getCorrectIcon } from "../../../utilities/Utilities";
+import { UseWeatherContext } from "../../../context/WeatherAppContext";
 
 export default function MainInfoCard() {
   const { weather, searchStatus } = UseWeatherContext();

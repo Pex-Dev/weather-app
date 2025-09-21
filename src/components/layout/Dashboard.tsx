@@ -1,7 +1,7 @@
-import MainInfoCard from "../UI/MainInfoCard";
-import CurrentWeatherDetails from "./CurrentWeatherDetails";
-import DailyForecast from "./DailyForecast";
-import HourlyForecast from "./HourlyForecast";
+import MainInfoCard from "./current/MainInfoCard";
+import CurrentWeatherDetails from "./current/CurrentWeatherDetails";
+import DailyForecast from "./daily/DailyForecast";
+import HourlyForecast from "./hourly/HourlyForecast";
 import { UseWeatherContext } from "../../context/WeatherAppContext";
 
 export default function Dashboard() {

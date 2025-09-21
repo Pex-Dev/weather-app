@@ -1,5 +1,5 @@
 import logo from "../../assets/images/logo.svg";
-import UnitsSelector from "../UI/UnitsSelector";
+import UnitsSelector from "../UI/units/UnitsSelector";
 
 export default function Header() {
   return (

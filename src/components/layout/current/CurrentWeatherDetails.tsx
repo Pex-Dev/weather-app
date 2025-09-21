@@ -1,5 +1,5 @@
-import DetailedInfoCard from "../UI/DetailedInfoCard";
-import { UseWeatherContext } from "../../context/WeatherAppContext";
+import DetailedInfoCard from "./DetailedInfoCard";
+import { UseWeatherContext } from "../../../context/WeatherAppContext";
 
 export default function CurrentWeatherDetails() {
   const { weather, searchStatus, units } = UseWeatherContext();

@@ -1,4 +1,4 @@
-import iconCheck from "../../assets/images/icon-checkmark.svg";
+import iconCheck from "../../../assets/images/icon-checkmark.svg";
 type UnitLabel = {
   label: string;
   name: string;

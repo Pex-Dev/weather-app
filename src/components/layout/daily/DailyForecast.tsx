@@ -1,5 +1,5 @@
-import DailyForecastCard from "../UI/DailyForecastCard";
-import { UseWeatherContext } from "../../context/WeatherAppContext";
+import DailyForecastCard from "./DailyForecastCard";
+import { UseWeatherContext } from "../../../context/WeatherAppContext";
 
 export default function DailyForecast() {
   const { weather, searchStatus } = UseWeatherContext();
