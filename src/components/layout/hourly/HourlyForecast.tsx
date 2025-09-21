@@ -44,7 +44,7 @@ export default function HourlyForecast() {
           setSelectedDay={weather ? setSelectedDay : undefined}
         />
       </header>
-      <ul className="my-3 flex flex-col gap-3 custom-scrollbar overflow-y-auto max-h-[520px] pr-4">
+      <ul className="my-3 flex flex-col gap-3 custom-scrollbar overflow-y-auto max-h-[520px] pr-4 focus:outline-0 focus:border-t focus:border-b focus:border-ui-main-border">
         {searchStatus === "loading" || !selectedDay
           ? ""
           : hourlyData?.map((hData, i) => (
