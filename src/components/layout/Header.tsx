@@ -1,4 +1,5 @@
 import logo from "../../assets/images/logo.svg";
+import LanguageSelector from "../UI/language/LanguageSelector";
 import UnitsSelector from "../UI/units/UnitsSelector";
 
 export default function Header() {
@@ -9,7 +10,10 @@ export default function Header() {
         alt="Weather now"
         className="max-w-[150px] md:max-w-max "
       />
-      <UnitsSelector />
+      <div className="flex flex-wrap justify-end gap-1 md:gap-4">
+        <LanguageSelector />
+        <UnitsSelector />
+      </div>
     </header>
   );
 }
