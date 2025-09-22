@@ -1,5 +1,10 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { saveUnits, getUnits } from "../utilities/Utilities";
+import {
+  saveUnits,
+  getUnits,
+  getLanguage,
+  saveLanguage,
+} from "../utilities/Utilities";
 import type {
   Units,
   SearchResults,
@@ -11,6 +16,8 @@ import type {
 import axios from "axios";
 
 type WeatherState = {
+  language: "en" | "es";
+  handleLanguageChange: (language: "en" | "es") => void;
   units: Units;
   handleUnitChange: (
     unit: "temperature" | "wind" | "precipitation",
@@ -41,6 +48,7 @@ export default function WeatherProvider({
 }: {
   children: React.ReactNode;
 }) {
+  const [language, setLanguage] = useState<"en" | "es">(getLanguage());
   const [searchData, setSearchData] = useState<{
     name: string;
     country: string;
@@ -64,6 +72,11 @@ export default function WeatherProvider({
       weather.longitude
     );
   }, [units]);
+
+  const handleLanguageChange = (newLanguage: "en" | "es") => {
+    setLanguage(newLanguage);
+    saveLanguage(newLanguage);
+  };
 
   const handleMainUnitsChange = (newMainUnits: "imperial" | "metric") => {
     const newUnits: Units = {
@@ -207,6 +220,8 @@ export default function WeatherProvider({
   return (
     <WeatherContext.Provider
       value={{
+        language,
+        handleLanguageChange,
         units,
         handleUnitChange,
         mainUnits,
