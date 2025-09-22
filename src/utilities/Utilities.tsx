@@ -224,3 +224,12 @@ export const getCorrectIcon = (weatherCode: number, hour: number): string => {
     return `/images/weather_icons/${WeatherCodes[weatherCode].icons.night}`;
   }
 };
+
+export const saveLanguage = (language: "en" | "es") => {
+  localStorage.setItem("language", language);
+};
+
+export const getLanguage = (): "en" | "es" => {
+  const language = localStorage.getItem("language");
+  return language === "es" ? "es" : "en";
+};
