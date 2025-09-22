@@ -1,5 +1,6 @@
 import iconDropdown from "../../assets/images/icon-dropdown.svg";
 import { useEffect, useRef, useState } from "react";
+import { UseWeatherContext } from "../../context/WeatherAppContext";
 
 export default function DaySelector({
   days,
@@ -12,6 +13,8 @@ export default function DaySelector({
 }) {
   const [showDropdown, setShowDropdown] = useState<boolean>(false);
   const daysDiv = useRef<HTMLDivElement>(null);
+
+  const { language } = UseWeatherContext();
 
   //Close menu when click outside
   useEffect(() => {
@@ -26,9 +29,12 @@ export default function DaySelector({
   }, [showDropdown]);
 
   const dateFormater = (rawDate: Date): string => {
-    return new Date(rawDate).toLocaleDateString("en-US", {
-      weekday: "long",
-    });
+    return new Date(rawDate).toLocaleDateString(
+      language === "en" ? "en-US" : "es-ES",
+      {
+        weekday: "long",
+      }
+    );
   };
 
   const removeDuplicates = (dates: string[]) => {
@@ -56,9 +62,12 @@ export default function DaySelector({
       >
         <span className=" text-white font-light">
           {selectedDay
-            ? new Date(selectedDay).toLocaleDateString("en-US", {
-                weekday: "long",
-              })
+            ? new Date(selectedDay).toLocaleDateString(
+                language === "en" ? "en-US" : "es-ES",
+                {
+                  weekday: "long",
+                }
+              )
             : "-"}
         </span>
         <img src={iconDropdown} alt="Icon dropdown" className="max-w-3" />

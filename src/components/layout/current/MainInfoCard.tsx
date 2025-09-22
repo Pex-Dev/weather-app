@@ -2,11 +2,11 @@ import { getCorrectIcon } from "../../../utilities/Utilities";
 import { UseWeatherContext } from "../../../context/WeatherAppContext";
 
 export default function MainInfoCard() {
-  const { weather, searchStatus } = UseWeatherContext();
+  const { weather, searchStatus, language } = UseWeatherContext();
 
   const dateFormater = (rawDate: string): string => {
     const date = new Date(rawDate);
-    return date.toLocaleDateString("en-US", {
+    return date.toLocaleDateString(language === "en" ? "en-US" : "es-ES", {
       weekday: "long",
       year: "numeric",
       month: "short",

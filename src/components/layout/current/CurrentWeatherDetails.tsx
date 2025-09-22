@@ -1,13 +1,14 @@
 import DetailedInfoCard from "./DetailedInfoCard";
 import { UseWeatherContext } from "../../../context/WeatherAppContext";
+import { t } from "../../../utilities/Utilities";
 
 export default function CurrentWeatherDetails() {
-  const { weather, searchStatus, units } = UseWeatherContext();
+  const { weather, searchStatus, units, language } = UseWeatherContext();
 
   return (
     <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-2">
       <DetailedInfoCard
-        label="Feels Like"
+        label={t(language, "feels_like")}
         value={
           searchStatus === "loading"
             ? "-"
@@ -17,7 +18,7 @@ export default function CurrentWeatherDetails() {
         }
       />
       <DetailedInfoCard
-        label="Humidity"
+        label={t(language, "humidity")}
         value={
           searchStatus === "loading"
             ? "-"
@@ -27,7 +28,7 @@ export default function CurrentWeatherDetails() {
         }
       />
       <DetailedInfoCard
-        label="Wind"
+        label={t(language, "wind")}
         value={
           searchStatus === "loading"
             ? "-"
@@ -37,7 +38,7 @@ export default function CurrentWeatherDetails() {
         }
       />
       <DetailedInfoCard
-        label="Precipitation"
+        label={t(language, "precipitation")}
         value={
           searchStatus === "loading"
             ? "-"

@@ -1,18 +1,24 @@
 import DailyForecastCard from "./DailyForecastCard";
 import { UseWeatherContext } from "../../../context/WeatherAppContext";
+import { t } from "../../../utilities/Utilities";
 
 export default function DailyForecast() {
-  const { weather, searchStatus } = UseWeatherContext();
+  const { weather, searchStatus, language } = UseWeatherContext();
 
   const DateFormater = (rawDate: Date): string => {
-    return new Date(rawDate).toLocaleDateString("en-US", {
-      weekday: "short",
-    });
+    return new Date(rawDate).toLocaleDateString(
+      language === "en" ? "en-US" : "es-ES",
+      {
+        weekday: "short",
+      }
+    );
   };
 
   return (
     <>
-      <h3 className="text-white text-xl font-light mt-3">Daily Forecast</h3>
+      <h3 className="text-white text-xl font-light mt-3">
+        {t(language, "daily_forecast")}
+      </h3>
       <div className="grid grid-cols-3 md:grid-cols-7 gap-4">
         {searchStatus === "loading" ? (
           <>

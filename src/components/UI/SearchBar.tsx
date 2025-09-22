@@ -3,6 +3,7 @@ import searchIcon from "../../assets/images/icon-search.svg";
 import loadingIcon from "../../assets/images/icon-loading.svg";
 import type { Result } from "../../types/Types";
 import { UseWeatherContext } from "../../context/WeatherAppContext";
+import { t } from "../../utilities/Utilities";
 
 export default function SearchBar() {
   const [inputText, setInputText] = useState<string>("");
@@ -11,7 +12,8 @@ export default function SearchBar() {
 
   const searchDivRef = useRef<HTMLDivElement>(null);
 
-  const { searchLocation, setSearchStatus, getWeather } = UseWeatherContext();
+  const { searchLocation, setSearchStatus, getWeather, language } =
+    UseWeatherContext();
 
   let inputClassName = `bg-ui-main hover:bg-ui-main-hover border-2 border-transparent focus-visible:border-background focus-visible:outline-2 focus-visible:outline-white focus-visible:border-2 transition-colors hover:cursor-pointer w-full rounded-lg text-white text-lg py-3.5`;
   inputClassName += inputText.length > 0 ? " p-3" : " pl-15";
@@ -69,7 +71,7 @@ export default function SearchBar() {
           <input
             type="search"
             name="search"
-            placeholder="Search for a place..."
+            placeholder={t(language, "search_placeholder")}
             autoComplete="off"
             value={inputText}
             onChange={(e) => handleInputChange(e)}
@@ -90,7 +92,7 @@ export default function SearchBar() {
               alt="Loading icon"
               className="animate-spin"
             />
-            <p className="text-white">Search in progress</p>
+            <p className="text-white">{t(language, "searching")}</p>
           </div>
         )}
         {results && (
@@ -119,7 +121,7 @@ export default function SearchBar() {
               ))
             ) : (
               <li className="h-[34px] flex items-center">
-                <p className="text-white">No results found</p>
+                <p className="text-white">{t(language, "no_results")}</p>
               </li>
             )}
           </ul>
@@ -130,7 +132,7 @@ export default function SearchBar() {
         type="submit"
         className="bg-blue-700 hover:bg-blue-800 border-2 border-transparent focus-visible:border-background focus-visible:outline-2 focus-visible:outline-blue-700 transition-colors hover:cursor-pointer text-white text-lg rounded-lg py-3.5 px-6"
       >
-        Search
+        {t(language, "search")}
       </button>
     </form>
   );
