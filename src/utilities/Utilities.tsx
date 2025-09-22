@@ -1,4 +1,6 @@
 import type { Units, WeatherCode } from "../types/Types";
+import type { TranslationKeys, Languges } from "../types/Translations";
+import { translations } from "../types/Translations";
 
 export const WeatherCodes: Record<number, WeatherCode> = {
   0: {
@@ -232,4 +234,8 @@ export const saveLanguage = (language: "en" | "es") => {
 export const getLanguage = (): "en" | "es" => {
   const language = localStorage.getItem("language");
   return language === "es" ? "es" : "en";
+};
+
+export const t = (lang: Languges, key: TranslationKeys) => {
+  return translations[lang][key] || key;
 };
