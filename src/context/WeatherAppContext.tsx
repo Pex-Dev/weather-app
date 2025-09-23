@@ -4,6 +4,8 @@ import {
   getUnits,
   getLanguage,
   saveLanguage,
+  getFavorites,
+  saveFavorites,
 } from "../utilities/Utilities";
 import type {
   Units,
@@ -12,6 +14,7 @@ import type {
   SearchStatus,
   Weather,
   ReverseGeocoding,
+  Location,
 } from "../types/Types";
 import axios from "axios";
 
@@ -37,6 +40,8 @@ type WeatherState = {
     longitude: number
   ) => void;
   tryAgain: () => void;
+  favorites: Location[];
+  handleFavorite: (location: Location) => void;
 };
 
 //create context
@@ -49,16 +54,12 @@ export default function WeatherProvider({
   children: React.ReactNode;
 }) {
   const [language, setLanguage] = useState<"en" | "es">(getLanguage());
-  const [searchData, setSearchData] = useState<{
-    name: string;
-    country: string;
-    latitude: number;
-    longitude: number;
-  } | null>(null);
+  const [searchData, setSearchData] = useState<Location | null>(null);
   const [searchStatus, setSearchStatus] = useState<SearchStatus>("idle");
   const [weather, setWeather] = useState<Weather | null>(null);
   const [mainUnits, setMainUnits] = useState<"imperial" | "metric">("metric");
   const [units, setUnits] = useState<Units>(getUnits());
+  const [favorites, setFavorites] = useState<Location[]>(getFavorites());
 
   const isGeolocationSupported: boolean = "geolocation" in navigator;
 
@@ -212,6 +213,32 @@ export default function WeatherProvider({
     );
   };
 
+  const handleFavorite = (location: Location) => {
+    // Check if the location is already in favorites
+    const isAlreadyFavorite = favorites.some(
+      (fav) =>
+        fav.latitude === location.latitude &&
+        fav.longitude === location.longitude
+    );
+
+    //If is in favorites, remove it
+    if (isAlreadyFavorite) {
+      const updatedFavorites = favorites.filter(
+        (fav) =>
+          fav.latitude !== location.latitude ||
+          fav.longitude !== location.longitude
+      );
+      setFavorites(updatedFavorites);
+      saveFavorites(updatedFavorites);
+      return;
+    }
+
+    //If not, add it
+    const updatedFavorites = [...favorites, location];
+    saveFavorites(updatedFavorites);
+    setFavorites(updatedFavorites);
+  };
+
   //Get current location on load
   useEffect(() => {
     getCurrentLocation();
@@ -233,6 +260,8 @@ export default function WeatherProvider({
         setSearchStatus,
         getWeather,
         tryAgain,
+        favorites,
+        handleFavorite,
       }}
     >
       {children}
