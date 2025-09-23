@@ -22,13 +22,13 @@ export default function DailyForecast() {
       <div className="grid grid-cols-3 md:grid-cols-7 gap-4">
         {searchStatus === "loading" ? (
           <>
-            <div className="bg-ui-main min-w-[102px] min-h-[158px] border border-ui-main-border rounded-xl"></div>
-            <div className="bg-ui-main min-w-[102px] min-h-[158px] border border-ui-main-border rounded-xl"></div>
-            <div className="bg-ui-main min-w-[102px] min-h-[158px] border border-ui-main-border rounded-xl"></div>
-            <div className="bg-ui-main min-w-[102px] min-h-[158px] border border-ui-main-border rounded-xl"></div>
-            <div className="bg-ui-main min-w-[102px] min-h-[158px] border border-ui-main-border rounded-xl"></div>
-            <div className="bg-ui-main min-w-[102px] min-h-[158px] border border-ui-main-border rounded-xl"></div>
-            <div className="bg-ui-main min-w-[102px] min-h-[158px] border border-ui-main-border rounded-xl"></div>
+            <div className="bg-ui-main w-full min-h-[158px] border border-ui-main-border rounded-xl"></div>
+            <div className="bg-ui-main w-full min-h-[158px] border border-ui-main-border rounded-xl"></div>
+            <div className="bg-ui-main w-full min-h-[158px] border border-ui-main-border rounded-xl"></div>
+            <div className="bg-ui-main w-full min-h-[158px] border border-ui-main-border rounded-xl"></div>
+            <div className="bg-ui-main w-full min-h-[158px] border border-ui-main-border rounded-xl"></div>
+            <div className="bg-ui-main w-full min-h-[158px] border border-ui-main-border rounded-xl"></div>
+            <div className="bg-ui-main w-full min-h-[158px] border border-ui-main-border rounded-xl"></div>
           </>
         ) : (
           weather?.daily.time.map((time, i) => (

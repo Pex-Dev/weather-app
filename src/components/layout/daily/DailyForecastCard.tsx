@@ -12,7 +12,7 @@ export default function DailyForecastCard({
   min: number;
 }) {
   return (
-    <div className="bg-ui-main border border-ui-main-border rounded-xl p-3 text-white min-w-[96px]">
+    <div className="bg-ui-main border border-ui-main-border rounded-xl p-3 text-white w-full">
       <h4 className="text-lg text-center">{day}</h4>
       <img
         src={`/images/weather_icons/${WeatherCodes[weatherCode].icons.day}`}

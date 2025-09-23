@@ -3,7 +3,8 @@ import { UseWeatherContext } from "../../../context/WeatherAppContext";
 import { t } from "../../../utilities/Utilities";
 
 export default function MainInfoCard() {
-  const { weather, searchStatus, language } = UseWeatherContext();
+  const { weather, searchStatus, language, favorites, handleFavorite } =
+    UseWeatherContext();
 
   const dateFormater = (rawDate: string): string => {
     const date = new Date(rawDate);
@@ -17,7 +18,7 @@ export default function MainInfoCard() {
 
   if (searchStatus === "success" && weather) {
     return (
-      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-9 rounded-3xl overflow-hidden py-12 md:px-5 bg-[url('/images/bg-today-small.svg')] md:bg-[url('/images/bg-today-large.svg')]  bg-no-repeat bg-cover">
+      <div className="relative flex flex-col md:flex-row md:items-center md:justify-between gap-9 rounded-3xl overflow-hidden py-12 md:px-5 bg-[url('/images/bg-today-small.svg')] md:bg-[url('/images/bg-today-large.svg')]  bg-no-repeat bg-cover">
         <div className="flex flex-col gap-2">
           <h2 className="text-white text-center md:text-left text-2xl font-semibold">
             {`${weather.name}, ${weather.country}`}
@@ -40,6 +41,39 @@ export default function MainInfoCard() {
             <span className="not-italic"> °</span>
           </p>
         </div>
+        <button
+          onClick={() =>
+            handleFavorite({
+              name: weather.name,
+              country: weather.country,
+              latitude: weather.latitude,
+              longitude: weather.longitude,
+            })
+          }
+          className={`absolute top-4 right-4 rounded-full p-1 text-neutral-400 hover:cursor-pointer ${
+            favorites.some(
+              (fav) =>
+                fav.latitude === weather.latitude &&
+                fav.longitude === weather.longitude
+            )
+              ? "text-yellow-100 bg-amber-400"
+              : " bg-white"
+          }`}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="28"
+            height="28"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.75"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z" />
+          </svg>
+        </button>
       </div>
     );
   }
