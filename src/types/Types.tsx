@@ -143,3 +143,10 @@ export type Address = {
   country: string;
   country_code: string;
 };
+
+export type Location = {
+  name: string;
+  country: string;
+  latitude: number;
+  longitude: number;
+};
