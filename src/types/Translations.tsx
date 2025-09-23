@@ -22,6 +22,7 @@ export const translations = {
       "We couldn't connect to the server (API error). Please try again in a few moments.",
     something_went_wrong: "Something went wrong",
     retry: "Try again",
+    loading: "Loading...",
   },
   es: {
     title: "¿Cómo se ve el cielo hoy?",
@@ -46,6 +47,7 @@ export const translations = {
       "No pudimos conectar con el servidor (error de API). Por favor, inténtelo de nuevo en unos momentos.",
     something_went_wrong: "Algo salió mal",
     retry: "Reintentar",
+    loading: "Cargando...",
   },
 } as const;
 
