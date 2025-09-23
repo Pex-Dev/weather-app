@@ -1,5 +1,6 @@
 import { getCorrectIcon } from "../../../utilities/Utilities";
 import { UseWeatherContext } from "../../../context/WeatherAppContext";
+import { t } from "../../../utilities/Utilities";
 
 export default function MainInfoCard() {
   const { weather, searchStatus, language } = UseWeatherContext();
@@ -52,7 +53,7 @@ export default function MainInfoCard() {
             <span className="animation-jump block w-2 h-2 bg-white rounded-full"></span>
             <span className="animation-jump block w-2 h-2 bg-white rounded-full"></span>
           </div>
-          <p className="text-neutral-300">Loading...</p>
+          <p className="text-neutral-300">{t(language, "loading")}</p>
         </div>
       </div>
     );
