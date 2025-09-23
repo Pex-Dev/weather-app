@@ -16,9 +16,19 @@ export default function MainInfoCard() {
     });
   };
 
+  const isInFavorites = (latitude: number, longitude: number) => {
+    return favorites.some(
+      (fav) => fav.latitude === latitude && fav.longitude === longitude
+    );
+  };
+
+  const labelKey = isInFavorites(weather?.latitude!, weather?.longitude!)
+    ? "remove_favorite"
+    : "add_favorite";
+
   if (searchStatus === "success" && weather) {
     return (
-      <div className="relative flex flex-col md:flex-row md:items-center md:justify-between gap-9 rounded-3xl overflow-hidden py-12 md:px-5 bg-[url('/images/bg-today-small.svg')] md:bg-[url('/images/bg-today-large.svg')]  bg-no-repeat bg-cover">
+      <div className="relative w-full flex flex-col md:flex-row md:items-center md:justify-between gap-9 rounded-3xl overflow-hidden py-12 md:px-5 bg-[url('/images/bg-today-small.svg')] md:bg-[url('/images/bg-today-large.svg')]  bg-no-repeat bg-cover">
         <div className="flex flex-col gap-2">
           <h2 className="text-white text-center md:text-left text-2xl font-semibold">
             {`${weather.name}, ${weather.country}`}
@@ -42,6 +52,9 @@ export default function MainInfoCard() {
           </p>
         </div>
         <button
+          aria-label={t(language, labelKey)}
+          title={t(language, labelKey)}
+          type="button"
           onClick={() =>
             handleFavorite({
               name: weather.name,
@@ -50,24 +63,20 @@ export default function MainInfoCard() {
               longitude: weather.longitude,
             })
           }
-          className={`absolute top-4 right-4 rounded-full p-1 text-neutral-400 hover:cursor-pointer ${
-            favorites.some(
-              (fav) =>
-                fav.latitude === weather.latitude &&
-                fav.longitude === weather.longitude
-            )
-              ? "text-yellow-100 bg-amber-400"
-              : " bg-white"
+          className={`absolute top-4 right-4 rounded-lg p-0.5 hover:cursor-pointer border ${
+            isInFavorites(weather.latitude, weather.longitude)
+              ? "text-white bg-yellow-500 border-transparent"
+              : "border-white  text-white"
           }`}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="28"
-            height="28"
+            width="25"
+            height="25"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
-            strokeWidth="1.75"
+            strokeWidth="1"
             strokeLinecap="round"
             strokeLinejoin="round"
           >
