@@ -11,7 +11,7 @@ export default function Dashboard() {
 
   return (
     <div className="flex flex-col lg:flex-row gap-4 mt-15 mb-15">
-      <div className="flex flex-col gap-5">
+      <div className="flex flex-col gap-5 flex-1">
         <MainInfoCard />
         <CurrentWeatherDetails />
         <DailyForecast />
