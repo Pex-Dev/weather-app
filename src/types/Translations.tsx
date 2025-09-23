@@ -23,6 +23,12 @@ export const translations = {
     something_went_wrong: "Something went wrong",
     retry: "Try again",
     loading: "Loading...",
+    favorites: "Favorites",
+    no_favorites: "No favorites",
+    add_favorite: "Add to favorites",
+    remove_favorite: "Remove from favorites",
+    close: "Close",
+    delete: "Delete",
   },
   es: {
     title: "¿Cómo se ve el cielo hoy?",
@@ -48,8 +54,14 @@ export const translations = {
     something_went_wrong: "Algo salió mal",
     retry: "Reintentar",
     loading: "Cargando...",
+    favorites: "Favoritos",
+    no_favorites: "No hay favoritos",
+    add_favorite: "Agregar a favoritos",
+    remove_favorite: "Quitar de favoritos",
+    close: "Cerrar",
+    delete: "Eliminar",
   },
 } as const;
 
-export type Languges = keyof typeof translations;
+export type Languages = keyof typeof translations;
 export type TranslationKeys = keyof (typeof translations)["en"];
