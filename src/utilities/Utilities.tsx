@@ -1,5 +1,5 @@
-import type { Units, WeatherCode } from "../types/Types";
-import type { TranslationKeys, Languges } from "../types/Translations";
+import type { Location, Units, WeatherCode } from "../types/Types";
+import type { TranslationKeys, Languages } from "../types/Translations";
 import { translations } from "../types/Translations";
 
 export const WeatherCodes: Record<number, WeatherCode> = {
@@ -236,6 +236,15 @@ export const getLanguage = (): "en" | "es" => {
   return language === "es" ? "es" : "en";
 };
 
-export const t = (lang: Languges, key: TranslationKeys) => {
+export const getFavorites = (): Location[] => {
+  const favorites = localStorage.getItem("favorites");
+  return favorites ? JSON.parse(favorites) : [];
+};
+
+export const saveFavorites = (favorites: Location[]) => {
+  localStorage.setItem("favorites", JSON.stringify(favorites));
+};
+
+export const t = (lang: Languages, key: TranslationKeys) => {
   return translations[lang][key] || key;
 };
