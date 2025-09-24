@@ -78,7 +78,10 @@ export default function DaySelector({
             <button
               key={day.toISOString()}
               className="block w-full px-2 py-1 rounded md:rounded-md text-left text-white font-extralight hover:bg-ui-main-hover focus:outline-1 focus:bg-ui-main-hover focus:outline-ui-main-border"
-              onClick={() => setSelectedDay(day)}
+              onClick={() => {
+                setSelectedDay(day);
+                setShowDropdown(false);
+              }}
             >
               {dateFormater(new Date(day))}
             </button>
