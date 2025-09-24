@@ -123,7 +123,7 @@ export default function WeatherProvider({
     try {
       const url = `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(
         location
-      )}&count=10&language=en&format=json`;
+      )}&count=10&language=${language}&format=json`;
 
       const response = await axios.get(url);
       const data: SearchResults = response.data;
@@ -177,7 +177,7 @@ export default function WeatherProvider({
     try {
       const { latitude, longitude } = position.coords;
       const response = await axios.get(
-        `https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json&accept-language=en`
+        `https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json&accept-language=${language}`
       );
 
       const location: ReverseGeocoding = response.data;
