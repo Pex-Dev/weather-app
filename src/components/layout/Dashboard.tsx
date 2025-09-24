@@ -10,7 +10,7 @@ export default function Dashboard() {
   if (searchStatus === "error" || searchStatus === "idle") return;
 
   return (
-    <div className="flex flex-col lg:flex-row gap-4 mt-15 mb-15">
+    <div className="flex flex-col lg:flex-row gap-4 mt-8 mb-10">
       <div className="flex flex-col gap-5 flex-1">
         <MainInfoCard />
         <CurrentWeatherDetails />

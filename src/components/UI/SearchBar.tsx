@@ -66,7 +66,7 @@ export default function SearchBar() {
         e.preventDefault();
         handleSubmit();
       }}
-      className="flex flex-col md:flex-row gap-3 w-full max-w-[670px] mx-auto mt-15"
+      className="flex flex-col md:flex-row gap-3 w-full max-w-[670px] mx-auto mt-10"
     >
       <div ref={searchDivRef} className="relative w-full">
         <div className="relative">
