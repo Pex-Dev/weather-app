@@ -17,7 +17,7 @@ export default function SearchBar() {
   const { searchLocation, setSearchStatus, getWeather, language } =
     UseWeatherContext();
 
-  let inputClassName = `bg-ui-main hover:bg-ui-main-hover border-2 border-transparent focus-visible:border-background focus-visible:outline-2 focus-visible:outline-white focus-visible:border-2 transition-colors hover:cursor-pointer w-full rounded-lg text-white text-lg py-3.5`;
+  let inputClassName = `bg-white hover:bg-neutral-100 dark:bg-ui-main hover:dark:bg-ui-main-hover border-2 border-transparent focus-visible:border-background focus-visible:outline-2 focus-visible:outline-white focus-visible:border-2 transition-colors hover:cursor-pointer w-full rounded-lg text-neutral-800 dark:text-white text-lg py-3.5`;
   inputClassName += inputText.length > 0 ? " p-3" : " pl-15";
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -129,7 +129,7 @@ export default function SearchBar() {
           </ul>
         )}
       </div>
-      <div className="flex bg-ui-main-hover rounded-r-xl rounded-l-lg">
+      <div className="flex bg-cyan-100 dark:bg-ui-main-hover rounded-r-xl rounded-l-lg">
         <button
           type="submit"
           className="flex-1 bg-blue-700 hover:bg-blue-800 border-2 border-transparent focus-visible:border-background focus-visible:outline-2 focus-visible:outline-blue-700 transition-colors hover:cursor-pointer text-white text-lg rounded-lg py-3.5 px-6"
@@ -140,7 +140,7 @@ export default function SearchBar() {
           type="button"
           aria-label={t(language, "favorites")}
           title={t(language, "favorites")}
-          className="text-white px-3 hover:cursor-pointer transition-colors"
+          className="text-neutral-500 dark:text-white px-3 hover:cursor-pointer transition-colors"
           onClick={() => setShowFavorites(!showFavorites)}
         >
           <svg

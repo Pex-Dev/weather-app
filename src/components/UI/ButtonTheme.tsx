@@ -4,8 +4,9 @@ export default function ButtonTheme() {
   return (
     <button
       type="button"
+      aria-label="togglet theme"
       onClick={() => toggleTheme()}
-      className={`bg-ui-main px-1 md:px-2 rounded-md ${
+      className={`bg-white shadow-md dark:bg-ui-main px-1 md:px-2 rounded-md ${
         theme === "dark" ? "text-white" : "text-cyan-900"
       }`}
     >

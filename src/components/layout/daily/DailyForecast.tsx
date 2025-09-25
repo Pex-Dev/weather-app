@@ -16,19 +16,19 @@ export default function DailyForecast() {
 
   return (
     <>
-      <h3 className="text-white text-xl font-light mt-3">
+      <h3 className="dark:text-white text-xl dark:font-light mt-3">
         {t(language, "daily_forecast")}
       </h3>
       <div className="grid grid-cols-3 md:grid-cols-7 gap-4">
         {searchStatus === "loading" ? (
           <>
-            <div className="bg-ui-main w-full min-h-[158px] border border-ui-main-border rounded-xl"></div>
-            <div className="bg-ui-main w-full min-h-[158px] border border-ui-main-border rounded-xl"></div>
-            <div className="bg-ui-main w-full min-h-[158px] border border-ui-main-border rounded-xl"></div>
-            <div className="bg-ui-main w-full min-h-[158px] border border-ui-main-border rounded-xl"></div>
-            <div className="bg-ui-main w-full min-h-[158px] border border-ui-main-border rounded-xl"></div>
-            <div className="bg-ui-main w-full min-h-[158px] border border-ui-main-border rounded-xl"></div>
-            <div className="bg-ui-main w-full min-h-[158px] border border-ui-main-border rounded-xl"></div>
+            <div className="bg-white dark:bg-ui-main w-full min-h-[158px] border dark:border-ui-main-border rounded-xl border-cyan-600 shadow-md dark:shadow-2xl"></div>
+            <div className="bg-white dark:bg-ui-main w-full min-h-[158px] border dark:border-ui-main-border rounded-xl border-cyan-600 shadow-md dark:shadow-2xl"></div>
+            <div className="bg-white dark:bg-ui-main w-full min-h-[158px] border dark:border-ui-main-border rounded-xl border-cyan-600 shadow-md dark:shadow-2xl"></div>
+            <div className="bg-white dark:bg-ui-main w-full min-h-[158px] border dark:border-ui-main-border rounded-xl border-cyan-600 shadow-md dark:shadow-2xl"></div>
+            <div className="bg-white dark:bg-ui-main w-full min-h-[158px] border dark:border-ui-main-border rounded-xl border-cyan-600 shadow-md dark:shadow-2xl"></div>
+            <div className="bg-white dark:bg-ui-main w-full min-h-[158px] border dark:border-ui-main-border rounded-xl border-cyan-600 shadow-md dark:shadow-2xl"></div>
+            <div className="bg-white dark:bg-ui-main w-full min-h-[158px] border dark:border-ui-main-border rounded-xl border-cyan-600 shadow-md dark:shadow-2xl"></div>
           </>
         ) : (
           weather?.daily.time.map((time, i) => (

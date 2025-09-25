@@ -121,14 +121,16 @@ export default function MainInfoCard() {
 
   if (searchStatus === "loading") {
     return (
-      <div className="flex flex-col items-center justify-center gap-9 rounded-3xl overflow-hidden  bg-ui-main h-[316px] md:h-[224px]">
+      <div className="flex flex-col items-center justify-center gap-9 rounded-3xl overflow-hidden  bg-white dark:bg-ui-main h-[316px] md:h-[224px]">
         <div className="flex flex-col gap-2 justify-center items-center">
           <div className="animation-jump-container flex gap-2 w-fit">
-            <span className="animation-jump block w-2 h-2 bg-white rounded-full"></span>
-            <span className="animation-jump block w-2 h-2 bg-white rounded-full"></span>
-            <span className="animation-jump block w-2 h-2 bg-white rounded-full"></span>
+            <span className="animation-jump block w-2 h-2 bg-neutral-600 dark:bg-white rounded-full"></span>
+            <span className="animation-jump block w-2 h-2 bg-neutral-600 dark:bg-white rounded-full"></span>
+            <span className="animation-jump block w-2 h-2 bg-neutral-600 dark:bg-white rounded-full"></span>
           </div>
-          <p className="text-neutral-300">{t(language, "loading")}</p>
+          <p className="text-neutral-500 dark:text-neutral-300">
+            {t(language, "loading")}
+          </p>
         </div>
       </div>
     );
