@@ -42,6 +42,8 @@ type WeatherState = {
   tryAgain: () => void;
   favorites: Location[];
   handleFavorite: (location: Location) => void;
+  getCurrentLocation: () => void;
+  locationAllowed?: boolean;
 };
 
 //create context
@@ -60,6 +62,9 @@ export default function WeatherProvider({
   const [mainUnits, setMainUnits] = useState<"imperial" | "metric">("metric");
   const [units, setUnits] = useState<Units>(getUnits());
   const [favorites, setFavorites] = useState<Location[]>(getFavorites());
+  const [locationAllowed, setLocationAllowed] = useState<boolean | undefined>(
+    undefined
+  );
 
   const isGeolocationSupported: boolean = "geolocation" in navigator;
 
@@ -174,6 +179,7 @@ export default function WeatherProvider({
 
   const currentPosition = async (position: GeolocationPosition) => {
     setSearchStatus("loading");
+    setLocationAllowed(true);
     try {
       const { latitude, longitude } = position.coords;
       const response = await axios.get(
@@ -196,11 +202,21 @@ export default function WeatherProvider({
 
   const getCurrentLocation = () => {
     if (isGeolocationSupported) {
-      navigator.geolocation.getCurrentPosition(currentPosition);
+      navigator.geolocation.getCurrentPosition(currentPosition, () =>
+        setLocationAllowed(false)
+      );
     } else {
       console.log("Geolocation is not supported by this browser.");
     }
   };
+
+  useEffect(() => {
+    navigator.permissions.query({ name: "geolocation" }).then((result) => {
+      if (result.state === "granted") {
+        navigator.geolocation.getCurrentPosition(currentPosition);
+      }
+    });
+  }, []);
 
   // Retry fetching weather data when in error state
   const tryAgain = () => {
@@ -239,11 +255,6 @@ export default function WeatherProvider({
     setFavorites(updatedFavorites);
   };
 
-  //Get current location on load
-  useEffect(() => {
-    getCurrentLocation();
-  }, []);
-
   return (
     <WeatherContext.Provider
       value={{
@@ -262,6 +273,8 @@ export default function WeatherProvider({
         tryAgain,
         favorites,
         handleFavorite,
+        getCurrentLocation,
+        locationAllowed,
       }}
     >
       {children}
