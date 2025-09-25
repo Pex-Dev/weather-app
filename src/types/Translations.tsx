@@ -29,6 +29,9 @@ export const translations = {
     remove_favorite: "Remove from favorites",
     close: "Close",
     delete: "Delete",
+    get_location: "Get your location",
+    location_blocked:
+      "You have blocked access to your location. Don't worry, search for your city in the search bar to see the weather.",
   },
   es: {
     title: "¿Cómo se ve el cielo hoy?",
@@ -60,6 +63,9 @@ export const translations = {
     remove_favorite: "Quitar de favoritos",
     close: "Cerrar",
     delete: "Eliminar",
+    get_location: "Obtener tu ubicación",
+    location_blocked:
+      "Has bloqueado el acceso a tu ubicación. No te preocupes, busca tu ciudad en la barra de búsqueda para ver el clima.",
   },
 } as const;
 
