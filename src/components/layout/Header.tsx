@@ -1,6 +1,7 @@
 import logo from "../../assets/images/logo.svg";
 import LanguageSelector from "../UI/language/LanguageSelector";
 import UnitsSelector from "../UI/units/UnitsSelector";
+import ButtonTheme from "../UI/ButtonTheme";
 
 export default function Header() {
   return (
@@ -10,8 +11,11 @@ export default function Header() {
         alt="Weather now"
         className="max-w-[150px] md:max-w-max "
       />
-      <div className="flex flex-wrap justify-end gap-1 md:gap-4">
-        <LanguageSelector />
+      <div className="flex flex-wrap justify-end gap-1.5 md:gap-4">
+        <div className="flex gap-1.5 md:gap-4">
+          <ButtonTheme />
+          <LanguageSelector />
+        </div>
         <UnitsSelector />
       </div>
     </header>
