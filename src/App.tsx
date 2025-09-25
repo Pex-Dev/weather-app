@@ -10,7 +10,7 @@ function App() {
   const { searchStatus } = UseWeatherContext();
 
   return (
-    <div className="p-4 max-w-[1220px] mx-auto md:mt-5">
+    <div className="p-4 max-w-[1220px] mx-auto">
       <Header />
       {searchStatus === "error" ? (
         <Error />
