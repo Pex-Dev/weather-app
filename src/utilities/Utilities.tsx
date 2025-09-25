@@ -254,3 +254,14 @@ export const saveFavorites = (favorites: Location[]) => {
 export const t = (lang: Languages, key: TranslationKeys) => {
   return translations[lang][key] || key;
 };
+
+export const getTheme = (): "light" | "dark" => {
+  const theme = localStorage.getItem("theme");
+  if (!theme) {
+    const preferedTheme = window.matchMedia("(prefers-color-scheme: dark)");
+    if (preferedTheme.matches) return "dark";
+    return "light";
+  }
+
+  return theme === "dark" ? "dark" : "light";
+};
