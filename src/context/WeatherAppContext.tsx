@@ -6,6 +6,7 @@ import {
   saveLanguage,
   getFavorites,
   saveFavorites,
+  getTheme,
 } from "../utilities/Utilities";
 import type {
   Units,
@@ -44,6 +45,8 @@ type WeatherState = {
   handleFavorite: (location: Location) => void;
   getCurrentLocation: () => void;
   locationAllowed?: boolean;
+  theme: "light" | "dark";
+  toggleTheme: () => void;
 };
 
 //create context
@@ -62,6 +65,7 @@ export default function WeatherProvider({
   const [mainUnits, setMainUnits] = useState<"imperial" | "metric">("metric");
   const [units, setUnits] = useState<Units>(getUnits());
   const [favorites, setFavorites] = useState<Location[]>(getFavorites());
+  const [theme, setTheme] = useState<"light" | "dark">(getTheme());
   const [locationAllowed, setLocationAllowed] = useState<boolean | undefined>(
     undefined
   );
@@ -78,6 +82,27 @@ export default function WeatherProvider({
       weather.longitude
     );
   }, [units]);
+
+  //Check if the user has already granted permission for geolocation
+  useEffect(() => {
+    navigator.permissions.query({ name: "geolocation" }).then((result) => {
+      if (result.state === "granted") {
+        navigator.geolocation.getCurrentPosition(currentPosition);
+      }
+    });
+  }, []);
+
+  useEffect(() => {
+    const html = document.documentElement;
+    if (html.classList.contains("dark")) {
+      html.classList.remove("dark");
+    }
+    if (html.classList.contains("light")) {
+      html.classList.remove("light");
+    }
+
+    html.classList.add(theme);
+  }, [theme]);
 
   const handleLanguageChange = (newLanguage: "en" | "es") => {
     setLanguage(newLanguage);
@@ -210,14 +235,6 @@ export default function WeatherProvider({
     }
   };
 
-  useEffect(() => {
-    navigator.permissions.query({ name: "geolocation" }).then((result) => {
-      if (result.state === "granted") {
-        navigator.geolocation.getCurrentPosition(currentPosition);
-      }
-    });
-  }, []);
-
   // Retry fetching weather data when in error state
   const tryAgain = () => {
     if (!searchData) return;
@@ -255,6 +272,17 @@ export default function WeatherProvider({
     setFavorites(updatedFavorites);
   };
 
+  const toggleTheme = () => {
+    setTheme((prev) => {
+      if (prev === "dark") {
+        localStorage.setItem("theme", "light");
+        return "light";
+      }
+      localStorage.setItem("theme", "dark");
+      return "dark";
+    });
+  };
+
   return (
     <WeatherContext.Provider
       value={{
@@ -275,6 +303,8 @@ export default function WeatherProvider({
         handleFavorite,
         getCurrentLocation,
         locationAllowed,
+        theme,
+        toggleTheme,
       }}
     >
       {children}
