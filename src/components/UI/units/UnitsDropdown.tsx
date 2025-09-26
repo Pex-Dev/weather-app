@@ -32,15 +32,11 @@ export default function UnitsDropdown() {
         </h3>
         <UnitLabel
           label="Celsius (°C)"
-          name={t(language, "temperature")}
-          value="celsius"
           selected={units.temperature == "celsius"}
           onClick={() => handleUnitChange("temperature", "celsius")}
         />
         <UnitLabel
           label="Fahrenheit (°F)"
-          name={t(language, "temperature")}
-          value="fahrenheit"
           selected={units.temperature == "fahrenheit"}
           onClick={() => handleUnitChange("temperature", "fahrenheit")}
         />
@@ -52,15 +48,11 @@ export default function UnitsDropdown() {
         </h3>
         <UnitLabel
           label="km/h"
-          name={t(language, "wind")}
-          value="kmh"
           selected={units.wind == "kmh"}
           onClick={() => handleUnitChange("wind", "kmh")}
         />
         <UnitLabel
           label="mph"
-          name={t(language, "wind")}
-          value="mph"
           selected={units.wind == "mph"}
           onClick={() => handleUnitChange("wind", "mph")}
         />
@@ -72,15 +64,11 @@ export default function UnitsDropdown() {
         </h3>
         <UnitLabel
           label={`${t(language, "millimeters")} (mm)`}
-          name={t(language, "precipitation")}
-          value="mm"
           selected={units.precipitation == "mm"}
           onClick={() => handleUnitChange("precipitation", "mm")}
         />
         <UnitLabel
           label={`${t(language, "inches")} (in)`}
-          name={t(language, "precipitation")}
-          value="inch"
           selected={units.precipitation == "inch"}
           onClick={() => handleUnitChange("precipitation", "inch")}
         />
