@@ -32,6 +32,9 @@ export const translations = {
     get_location: "Get your location",
     location_blocked:
       "You have blocked access to your location. Don't worry, search for your city in the search bar to see the weather.",
+    dark_theme: "Dark Theme",
+    light_theme: "Light Theme",
+    change_to: "Change to ",
   },
   es: {
     title: "¿Cómo se ve el cielo hoy?",
@@ -66,6 +69,9 @@ export const translations = {
     get_location: "Obtener tu ubicación",
     location_blocked:
       "Has bloqueado el acceso a tu ubicación. No te preocupes, busca tu ciudad en la barra de búsqueda para ver el clima.",
+    dark_theme: "Tema oscuro",
+    light_theme: "Tema claro",
+    change_to: "Cambiar a ",
   },
 } as const;
 
