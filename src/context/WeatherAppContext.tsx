@@ -38,7 +38,9 @@ type WeatherState = {
     name: string,
     country: string,
     latitude: number,
-    longitude: number
+    longitude: number,
+    startLoading?: boolean,
+    setAsCompareLocation?: boolean
   ) => void;
   tryAgain: () => void;
   favorites: Location[];
@@ -47,6 +49,8 @@ type WeatherState = {
   locationAllowed?: boolean;
   theme: "light" | "dark";
   toggleTheme: () => void;
+  locationsToCompare: Weather[] | null;
+  setLocationsToCompare: React.Dispatch<React.SetStateAction<Weather[] | null>>;
 };
 
 //create context
@@ -69,6 +73,9 @@ export default function WeatherProvider({
   const [locationAllowed, setLocationAllowed] = useState<boolean | undefined>(
     undefined
   );
+  const [locationsToCompare, setLocationsToCompare] = useState<
+    Weather[] | null
+  >(null);
 
   const isGeolocationSupported: boolean = "geolocation" in navigator;
 
@@ -171,7 +178,8 @@ export default function WeatherProvider({
     country: string,
     latitude: number,
     longitude: number,
-    startLoading: boolean = false
+    startLoading: boolean = false,
+    setAsCompareLocation: boolean = false
   ) => {
     if (!startLoading) {
       if (searchStatus === "loading") return;
@@ -193,8 +201,13 @@ export default function WeatherProvider({
       }`;
       const response = await axios.get(url);
       let weather: Weather = response.data;
-      weather = { ...weather, name, country };
-      setWeather(weather);
+      weather = { ...weather, latitude, longitude, name, country };
+
+      if (setAsCompareLocation) {
+        setLocationsToCompare((prev) => [...(prev ?? []), weather]);
+      } else {
+        setWeather(weather);
+      }
       setSearchStatus("success");
     } catch (error) {
       console.error(error);
@@ -242,7 +255,9 @@ export default function WeatherProvider({
       searchData.name,
       searchData.country,
       searchData.latitude,
-      searchData.longitude
+      searchData.longitude,
+      false,
+      locationsToCompare ? true : false
     );
   };
 
@@ -305,6 +320,8 @@ export default function WeatherProvider({
         locationAllowed,
         theme,
         toggleTheme,
+        locationsToCompare,
+        setLocationsToCompare,
       }}
     >
       {children}
