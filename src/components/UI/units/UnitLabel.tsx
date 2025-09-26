@@ -1,34 +1,25 @@
 type UnitLabel = {
   label: string;
-  name: string;
-  value: string;
   onClick: Function;
   selected?: boolean;
 };
 
 export default function UnitLabel({
   label,
-  name,
-  value,
   onClick,
   selected = false,
 }: UnitLabel) {
   return (
-    <label
-      className={`flex items-center justify-between px-2 py-1 rounded md:rounded-md text-neutral-700 dark:text-white font-extralight ${
+    <button
+      type="button"
+      onClick={() => onClick()}
+      className={`flex items-center justify-between px-2 py-1 rounded md:rounded-md text-neutral-700 dark:text-white font-extralight  ${
         selected
           ? "bg-neutral-100 dark:bg-ui-main-hover"
-          : "hover:bg-neutral-100 hover:dark:bg-ui-main-hover"
+          : "hover:bg-neutral-100 hover:dark:bg-ui-main-hover focus:bg-neutral-100 focus:dark:bg-ui-main-hover"
       }`}
     >
-      {label}
-      <input
-        type="radio"
-        name={name}
-        value={value}
-        onClick={() => onClick()}
-        className="appearance-none"
-      />
+      <span>{label}</span>
       {selected && (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -43,6 +34,6 @@ export default function UnitLabel({
           />
         </svg>
       )}
-    </label>
+    </button>
   );
 }
