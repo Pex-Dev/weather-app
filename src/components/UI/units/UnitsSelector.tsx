@@ -24,6 +24,8 @@ export default function UnitsSelector() {
   return (
     <div ref={unitsDiv} className="relative">
       <button
+        aria-label={t(language, "units")}
+        title={t(language, "units")}
         onClick={() => setShowDropdown((prev) => !prev)}
         className="bg-white shadow-md dark:shadow-none dark:bg-ui-main hover:bg-neutral-200 hover:dark:bg-ui-main-hover hover:cursor-pointer transition-colors flex justify-between gap-1.5 items-center py-1 md:py-2 px-3 md:px-4 rounded-md"
       >

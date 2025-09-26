@@ -2,6 +2,7 @@ import esFlag from "../../../assets/images/spain_flag.jpg";
 import enFlag from "../../../assets/images/uk_flag.jpg";
 import { useEffect, useRef, useState } from "react";
 import { UseWeatherContext } from "../../../context/WeatherAppContext";
+import { t } from "../../../utilities/Utilities";
 
 export default function LanguageSelector() {
   const [showDropdown, setShowDropdown] = useState<Boolean>(false);
@@ -30,6 +31,8 @@ export default function LanguageSelector() {
     <div ref={unitsDiv} className="relative">
       <button
         onClick={() => setShowDropdown((prev) => !prev)}
+        aria-label={t(language, "language")}
+        title={t(language, "language")}
         className="bg-white shadow-md dark:shadow-none dark:bg-ui-main hover:bg-neutral-200 hover:dark:bg-ui-main-hover hover:cursor-pointer transition-colors flex justify-between gap-1.5 items-center py-1 md:py-2 px-3 md:px-4 rounded-md"
       >
         <img
@@ -63,12 +66,8 @@ export default function LanguageSelector() {
             }}
             className="flex items-center gap-2 w-full px-2 py-1 rounded md:rounded-md text-left text-neutral-700 dark:text-white font-extralight hover:bg-neutral-100 hover:dark:bg-ui-main-hover focus:outline-1 focus:bg-neutral-100 focus:outline-neutral-300 focus:dark:bg-ui-main-hover focus:dark:outline-ui-main-border"
           >
-            <img
-              src={enFlag}
-              alt="Flag of English"
-              className="max-w-5 max-h-4"
-            />
-            English
+            <img src={enFlag} alt="English icon" className="max-w-5 max-h-4" />
+            {t(language, "english")}
           </button>
           <button
             onClick={() => {
@@ -77,12 +76,8 @@ export default function LanguageSelector() {
             }}
             className="flex items-center gap-2 w-full px-2 py-1 rounded md:rounded-md text-left text-neutral-700 dark:text-white font-extralight hover:bg-neutral-100 hover:dark:bg-ui-main-hover focus:outline-1 focus:bg-neutral-100 focus:outline-neutral-300 focus:dark:bg-ui-main-hover focus:dark:outline-ui-main-border"
           >
-            <img
-              src={esFlag}
-              alt="Flag of English"
-              className="max-w-5 max-h-4"
-            />
-            Spanish
+            <img src={esFlag} alt="Spanish icon" className="max-w-5 max-h-4" />
+            {t(language, "spanish")}
           </button>
         </div>
       )}
