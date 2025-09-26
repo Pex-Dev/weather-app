@@ -35,6 +35,9 @@ export const translations = {
     dark_theme: "Dark Theme",
     light_theme: "Light Theme",
     change_to: "Change to ",
+    english: "English",
+    spanish: "Spanish",
+    language: "Language",
   },
   es: {
     title: "¿Cómo se ve el cielo hoy?",
@@ -72,6 +75,9 @@ export const translations = {
     dark_theme: "Tema oscuro",
     light_theme: "Tema claro",
     change_to: "Cambiar a ",
+    english: "Inglés",
+    spanish: "Español",
+    language: "Idioma",
   },
 } as const;
 
