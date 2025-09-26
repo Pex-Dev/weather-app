@@ -74,7 +74,10 @@ export default function Favorites({ close }: { close: () => void }) {
         ) : (
           <ul className="flex flex-col gap-2 mt-4 text-white">
             {favorites.map((fav) => (
-              <li className="flex justify-between items-center bg-neutral-200 dark:bg-ui-main-hover px-2 py-1 md:px-3 md:py-2 rounded-md border-2 border-transparent hover:border-ui-main-border">
+              <li
+                key={`${fav.latitude}.${fav.longitude}`}
+                className="flex justify-between items-center bg-neutral-200 dark:bg-ui-main-hover px-2 py-1 md:px-3 md:py-2 rounded-md border-2 border-transparent hover:border-ui-main-border"
+              >
                 <p
                   className="text-neutral-600 dark:text-gray-300 hover:text-neutral-700 hover:dark:text-white cursor-pointer"
                   onClick={() => handleGetWeather(fav)}
