@@ -1,10 +1,20 @@
 import { UseWeatherContext } from "../../context/WeatherAppContext";
+import { t } from "../../utilities/Utilities";
 export default function ButtonTheme() {
-  const { toggleTheme, theme } = UseWeatherContext();
+  const { toggleTheme, theme, language } = UseWeatherContext();
   return (
     <button
       type="button"
-      aria-label="togglet theme"
+      aria-label={`${t(language, "change_to")}${
+        theme === "dark"
+          ? t(language, "light_theme")
+          : t(language, "dark_theme")
+      }`}
+      title={`${t(language, "change_to")}${
+        theme === "dark"
+          ? t(language, "light_theme")
+          : t(language, "dark_theme")
+      }`}
       onClick={() => toggleTheme()}
       className={`bg-white shadow-md dark:bg-ui-main px-1 md:px-2 rounded-md ${
         theme === "dark" ? "text-white" : "text-cyan-900"
