@@ -38,6 +38,10 @@ export const translations = {
     english: "English",
     spanish: "Spanish",
     language: "Language",
+    compare: "Compare",
+    compare_locations: "Compare Locations",
+    back_to_forecast: "Back to forecast",
+    remove: "Remove",
   },
   es: {
     title: "¿Cómo se ve el cielo hoy?",
@@ -78,6 +82,10 @@ export const translations = {
     english: "Inglés",
     spanish: "Español",
     language: "Idioma",
+    compare: "Comparar",
+    compare_locations: "Comparar ubicaciones",
+    back_to_forecast: "Volver al pronóstico",
+    remove: "Quitar",
   },
 } as const;
 
