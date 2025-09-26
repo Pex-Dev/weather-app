@@ -3,8 +3,14 @@ import { UseWeatherContext } from "../../../context/WeatherAppContext";
 import { t } from "../../../utilities/Utilities";
 
 export default function MainInfoCard() {
-  const { weather, searchStatus, language, favorites, handleFavorite } =
-    UseWeatherContext();
+  const {
+    weather,
+    searchStatus,
+    language,
+    favorites,
+    handleFavorite,
+    setLocationsToCompare,
+  } = UseWeatherContext();
 
   const dateFormater = (rawDate: string): string => {
     const date = new Date(rawDate);
@@ -114,6 +120,31 @@ export default function MainInfoCard() {
           {isInFavorites(weather.latitude, weather.longitude)
             ? savedAsFavoriteIcon
             : saveAsFavoriteIcon}
+        </button>
+        <button
+          onClick={() => setLocationsToCompare([weather])}
+          className="bg-ui-main/70 hover:bg-ui-main/90 flex gap-3 px-2 absolute bottom-3 left-2/5 md:bottom-auto md:top-4 md:left-4 rounded-md p-0.5 hover:cursor-pointer text-neutral-200 hover:text-white"
+        >
+          <span>{t(language, "compare")}</span>
+          <svg
+            fill="currentColor"
+            width="25px"
+            height="25px"
+            viewBox="0 0 24.00 24.00"
+            xmlns="http://www.w3.org/2000/svg"
+            stroke="#000000"
+            strokeWidth="0.00024000000000000003"
+          >
+            <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+            <g
+              id="SVGRepo_tracerCarrier"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            ></g>
+            <g id="SVGRepo_iconCarrier">
+              <path d="M1,8A1,1,0,0,1,2,7H9.586L7.293,4.707A1,1,0,1,1,8.707,3.293l4,4a1,1,0,0,1,0,1.414l-4,4a1,1,0,1,1-1.414-1.414L9.586,9H2A1,1,0,0,1,1,8Zm21,7H14.414l2.293-2.293a1,1,0,0,0-1.414-1.414l-4,4a1,1,0,0,0,0,1.414l4,4a1,1,0,0,0,1.414-1.414L14.414,17H22a1,1,0,0,0,0-2Z"></path>
+            </g>
+          </svg>
         </button>
       </div>
     );
