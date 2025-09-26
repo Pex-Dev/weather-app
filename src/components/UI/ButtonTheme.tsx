@@ -13,7 +13,7 @@ export default function ButtonTheme() {
       aria-label={textLabel}
       title={textLabel}
       onClick={() => toggleTheme()}
-      className={`bg-white shadow-md dark:bg-ui-main px-1 md:px-2 rounded-md ${
+      className={`bg-white hover:bg-neutral-200 shadow-md hover:dark:bg-ui-main-hover dark:bg-ui-main px-1 md:px-2 rounded-md hover:cursor-pointer ${
         theme === "dark" ? "text-white" : "text-cyan-900"
       }`}
     >
