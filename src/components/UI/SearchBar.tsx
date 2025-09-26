@@ -132,6 +132,8 @@ export default function SearchBar() {
       <div className="flex bg-cyan-100 dark:bg-ui-main-hover rounded-r-xl rounded-l-lg">
         <button
           type="submit"
+          aria-label={t(language, "search")}
+          title={t(language, "search")}
           className="flex-1 bg-blue-700 hover:bg-blue-800 border-2 border-transparent focus-visible:border-background focus-visible:outline-2 focus-visible:outline-blue-700 transition-colors hover:cursor-pointer text-white text-lg rounded-lg py-3.5 px-6"
         >
           {t(language, "search")}
