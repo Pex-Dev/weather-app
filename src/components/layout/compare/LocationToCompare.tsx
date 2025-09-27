@@ -1,7 +1,7 @@
 import type { Weather } from "../../../types/Types";
 import { getCorrectIcon, WeatherCodes } from "../../../utilities/Utilities";
 import { UseWeatherContext } from "../../../context/WeatherAppContext";
-import { t } from "../../../utilities/Utilities";
+import { getImperialUnit, t } from "../../../utilities/Utilities";
 
 export default function LocationToCompare({ location }: { location: Weather }) {
   const { language, units, setLocationsToCompare } = UseWeatherContext();
@@ -58,7 +58,11 @@ export default function LocationToCompare({ location }: { location: Weather }) {
           className="max-w-[100px] md:max-w-[160] mx-auto"
         />
         <p className="text-4xl md:text-5xl font-bold text-neutral-700 dark:text-white italic text-center min-w-[80px] ">
-          {Math.round(location.current.temperature_2m)}
+          {Math.round(
+            units.temperature === "celsius"
+              ? location.current.temperature_2m
+              : getImperialUnit("fahrenheit", location.current.temperature_2m)
+          )}
           <span className="not-italic"> °</span>
         </p>
       </div>
@@ -66,7 +70,15 @@ export default function LocationToCompare({ location }: { location: Weather }) {
         <p className="bg-gray-100 dark:bg-ui-main-hover p-2 rounded-sm flex gap-1 items-center justify-between md:flex-col text-neutral-600 dark:text-gray-300 text-sm break-words">
           {t(language, "feels_like")}
           <span className="text-neutral-700 dark:text-white text-xl md:text-2xl">
-            {Math.round(location.current.apparent_temperature)}°
+            {Math.round(
+              units.temperature === "celsius"
+                ? location.current.apparent_temperature
+                : getImperialUnit(
+                    "fahrenheit",
+                    location.current.apparent_temperature
+                  )
+            )}
+            °
           </span>
         </p>
         <p className="bg-gray-100 dark:bg-ui-main-hover p-2 rounded-sm flex gap-1 items-center justify-between md:flex-col text-neutral-600 dark:text-gray-300 text-sm break-words">
@@ -79,14 +91,22 @@ export default function LocationToCompare({ location }: { location: Weather }) {
         <p className="bg-gray-100 dark:bg-ui-main-hover p-2 rounded-sm flex gap-1 items-center justify-between md:flex-col text-neutral-600 dark:text-gray-300 text-sm break-words">
           {t(language, "wind")}
           <span className="text-neutral-700 dark:text-white text-xl md:text-2xl">
-            {Math.round(location.current.wind_speed_10m)}
+            {Math.round(
+              units.wind === "kmh"
+                ? location.current.wind_speed_10m
+                : getImperialUnit("mph", location.current.wind_speed_10m)
+            )}
             <span className="text-sm md:text-lg"> {units.wind}</span>
           </span>
         </p>
         <p className="bg-gray-100 dark:bg-ui-main-hover p-2 rounded-sm flex gap-1 items-center justify-between md:flex-col text-neutral-600 dark:text-gray-300 text-sm break-words">
           {t(language, "precipitation")}
           <span className="text-neutral-700 dark:text-white text-xl md:text-2xl">
-            {Math.round(location.current.precipitation)}
+            {Math.round(
+              units.precipitation === "mm"
+                ? location.current.precipitation
+                : getImperialUnit("inch", location.current.precipitation)
+            )}
             <span className="text-sm md:text-lg"> {units.precipitation}</span>
           </span>
         </p>
