@@ -147,13 +147,13 @@ export default function SearchBar({
           </ul>
         )}
       </div>
-      <div className="shadow-md flex bg-cyan-100 dark:bg-ui-main-hover rounded-lg">
+      <div className="shadow-md flex bg-white dark:bg-ui-main-hover rounded-lg">
         {/* Button submit */}
         <button
           type="submit"
           aria-label={t(language, "search")}
           title={t(language, "search")}
-          className="flex-1 bg-blue-700 hover:bg-blue-800 border-2 border-transparent focus-visible:border-background focus-visible:outline-2 focus-visible:outline-blue-700 transition-colors hover:cursor-pointer text-white text-lg rounded-lg py-1.5 md:py-3.5 px-6"
+          className="flex-1 border-2 border-white dark:border-ui-main bg-green-700 hover:bg-green-800 dark:bg-blue-700 hover:dark:bg-blue-800 focus-visible:border-background focus-visible:outline-2 focus-visible:outline-blue-700 transition-colors hover:cursor-pointer text-white text-lg rounded-lg py-1.5 md:py-3.5 px-6"
         >
           {t(language, "search")}
         </button>
@@ -163,7 +163,7 @@ export default function SearchBar({
             type="button"
             aria-label={t(language, "favorites")}
             title={t(language, "favorites")}
-            className="text-neutral-500 dark:text-white px-3 hover:cursor-pointer transition-colors"
+            className="text-neutral-400 hover:text-neutral-500 hover:dark:text-yellow-100 dark:text-white px-3 hover:cursor-pointer transition-colors"
             onClick={() => setShowFavorites(!showFavorites)}
           >
             <svg

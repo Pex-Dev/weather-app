@@ -124,17 +124,17 @@ export default function MainInfoCard() {
               longitude: weather.longitude,
             })
           }
-          className="absolute top-4 right-4 rounded-lg p-0.5 hover:cursor-pointer text-white"
+          className="absolute top-4 right-4 rounded-lg p-0.2 hover:cursor-pointer text-white hover:scale-105 hover:text-yellow-100 transition-transform"
         >
           {isInFavorites(weather.latitude, weather.longitude)
             ? savedAsFavoriteIcon
             : saveAsFavoriteIcon}
         </button>
         {/* Button compare locations */}
-        <div className="absolute bottom-3 w-full md:bottom-auto md:top-4 md:left-4">
+        <div className="absolute bottom-3 w-full md:bottom-auto md:top-4 md:left-4 pointer-events-none">
           <button
             onClick={() => setLocationsToCompare([weather])}
-            className="text-sm md:text-base items-center border border-cyan-800 md:border-cyan-800/50 mx-auto md:ml-0 bg-ui-main hover:bg-ui-main-hover lg:bg-ui-main/70 md:hover:bg-ui-main/90 flex gap-3 px-2  rounded-md p-0.5 hover:cursor-pointer text-neutral-200 hover:text-white"
+            className="pointer-events-auto transition-colors text-sm md:text-base items-center border border-cyan-800 md:border-cyan-800/50 mx-auto md:ml-0 bg-ui-main hover:bg-ui-main-hover lg:bg-ui-main/70 md:hover:bg-ui-main/90 flex gap-3 px-2  rounded-md p-0.5 hover:cursor-pointer text-neutral-200 hover:text-white"
           >
             <span>{t(language, "compare")}</span>
             <svg
