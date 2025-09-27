@@ -16,7 +16,7 @@ export default function DailyForecast() {
 
   return (
     <>
-      <h3 className="dark:text-white text-xl dark:font-light mt-3">
+      <h3 className="text-ui-main font-medium dark:text-white text-xl dark:font-light mt-3">
         {t(language, "daily_forecast")}
       </h3>
       <div className="grid grid-cols-3 md:grid-cols-7 gap-3 md:gap-4">
