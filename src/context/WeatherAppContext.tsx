@@ -79,17 +79,6 @@ export default function WeatherProvider({
 
   const isGeolocationSupported: boolean = "geolocation" in navigator;
 
-  //Get weather again when the units change
-  useEffect(() => {
-    if (searchStatus !== "success" || !weather) return;
-    getWeather(
-      weather.name,
-      weather.country,
-      weather.latitude,
-      weather.longitude
-    );
-  }, [units]);
-
   //Check if the user has already granted permission for geolocation
   useEffect(() => {
     navigator.permissions.query({ name: "geolocation" }).then((result) => {
@@ -194,11 +183,7 @@ export default function WeatherProvider({
         latitude
       )}&longitude=${encodeURIComponent(
         longitude
-      )}&daily=weather_code,temperature_2m_min,temperature_2m_max&hourly=temperature_2m,weather_code&current=temperature_2m,precipitation,weather_code,wind_speed_10m,relative_humidity_2m,apparent_temperature,relative_humidity_2m&timezone=auto&wind_speed_unit=${
-        units.wind
-      }&temperature_unit=${units.temperature}&precipitation_unit=${
-        units.precipitation
-      }`;
+      )}&daily=weather_code,temperature_2m_min,temperature_2m_max&hourly=temperature_2m,weather_code&current=temperature_2m,precipitation,weather_code,wind_speed_10m,relative_humidity_2m,apparent_temperature,relative_humidity_2m&timezone=auto&wind_speed_unit=kmh&temperature_unit=celsius&precipitation_unit=mm`;
       const response = await axios.get(url);
       let weather: Weather = response.data;
       weather = { ...weather, latitude, longitude, name, country };
