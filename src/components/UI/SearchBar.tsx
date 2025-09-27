@@ -1,6 +1,5 @@
 import { useState, useRef, useEffect } from "react";
 import searchIcon from "../../assets/images/icon-search.svg";
-import loadingIcon from "../../assets/images/icon-loading.svg";
 import type { Result } from "../../types/Types";
 import { UseWeatherContext } from "../../context/WeatherAppContext";
 import { t } from "../../utilities/Utilities";
@@ -96,13 +95,21 @@ export default function SearchBar({
         </div>
         {searchInProgress && (
           // Searching message
-          <div className="flex gap-3 absolute mt-3 bg-ui-main rounded-lg p-4.5 w-full shadow-2xl z-10">
-            <img
-              src={loadingIcon}
-              alt="Loading icon"
+          <div className="flex gap-3 absolute mt-3 bg-white dark:bg-ui-main rounded-lg p-4.5 w-full shadow-2xl z-10 text-neutral-700 dark:text-white">
+            <svg
               className="animate-spin"
-            />
-            <p className="text-white">{t(language, "searching")}</p>
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="none"
+              viewBox="0 0 16 16"
+            >
+              <path
+                fill="currentColor"
+                d="M9.25 1.5c0 .719-.563 1.25-1.25 1.25-.719 0-1.25-.531-1.25-1.25C6.75.812 7.281.25 8 .25c.688 0 1.25.563 1.25 1.25ZM8 13.25c.688 0 1.25.563 1.25 1.25 0 .719-.563 1.25-1.25 1.25-.719 0-1.25-.531-1.25-1.25 0-.688.531-1.25 1.25-1.25ZM15.75 8c0 .719-.563 1.25-1.25 1.25-.719 0-1.25-.531-1.25-1.25 0-.688.531-1.25 1.25-1.25.688 0 1.25.563 1.25 1.25Zm-13 0c0 .719-.563 1.25-1.25 1.25C.781 9.25.25 8.719.25 8c0-.688.531-1.25 1.25-1.25.688 0 1.25.563 1.25 1.25Zm.625-5.844c.719 0 1.25.563 1.25 1.25 0 .719-.531 1.25-1.25 1.25-.688 0-1.25-.531-1.25-1.25 0-.687.563-1.25 1.25-1.25Zm9.219 9.219c.687 0 1.25.531 1.25 1.25 0 .688-.563 1.25-1.25 1.25-.719 0-1.25-.563-1.25-1.25 0-.719.531-1.25 1.25-1.25Zm-9.219 0c.719 0 1.25.531 1.25 1.25 0 .688-.531 1.25-1.25 1.25-.688 0-1.25-.563-1.25-1.25 0-.719.563-1.25 1.25-1.25Z"
+              />
+            </svg>
+            <p>{t(language, "searching")}</p>
           </div>
         )}
         {/* Results */}
