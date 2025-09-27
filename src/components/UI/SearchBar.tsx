@@ -95,7 +95,7 @@ export default function SearchBar({
         </div>
         {searchInProgress && (
           // Searching message
-          <div className="flex gap-3 absolute mt-3 bg-white dark:bg-ui-main rounded-lg p-4.5 w-full shadow-2xl z-10 text-neutral-700 dark:text-white">
+          <div className="flex items-center gap-3 absolute mt-3 bg-white dark:bg-ui-main rounded-lg p-4.5 w-full shadow-2xl z-10 text-neutral-700 dark:text-white">
             <svg
               className="animate-spin"
               xmlns="http://www.w3.org/2000/svg"
