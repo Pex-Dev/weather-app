@@ -1,9 +1,9 @@
 import DailyForecastCard from "./DailyForecastCard";
 import { UseWeatherContext } from "../../../context/WeatherAppContext";
-import { t } from "../../../utilities/Utilities";
+import { getImperialUnit, t } from "../../../utilities/Utilities";
 
 export default function DailyForecast() {
-  const { weather, searchStatus, language } = UseWeatherContext();
+  const { weather, units, searchStatus, language } = UseWeatherContext();
 
   const DateFormater = (rawDate: Date): string => {
     return new Date(rawDate).toLocaleDateString(
@@ -31,13 +31,28 @@ export default function DailyForecast() {
             <div className="bg-white dark:bg-ui-main w-full min-h-[158px] border dark:border-ui-main-border rounded-xl border-cyan-600 shadow-md dark:shadow-2xl"></div>
           </>
         ) : (
-          weather?.daily.time.map((time, i) => (
+          weather &&
+          weather.daily.time.map((time, i) => (
             <DailyForecastCard
               key={i}
               day={DateFormater(time)}
-              weatherCode={weather ? weather.daily.weather_code[i] : 0}
-              max={weather ? weather.daily.temperature_2m_max[i] : 0}
-              min={weather ? weather.daily.temperature_2m_min[i] : 0}
+              weatherCode={weather.daily.weather_code[i]}
+              max={
+                units.temperature === "celsius"
+                  ? weather.daily.temperature_2m_max[i]
+                  : getImperialUnit(
+                      "fahrenheit",
+                      weather.daily.temperature_2m_max[i]
+                    )
+              }
+              min={
+                units.temperature === "celsius"
+                  ? weather.daily.temperature_2m_min[i]
+                  : getImperialUnit(
+                      "fahrenheit",
+                      weather.daily.temperature_2m_min[i]
+                    )
+              }
             />
           ))
         )}

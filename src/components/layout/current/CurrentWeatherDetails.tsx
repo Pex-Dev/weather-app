@@ -1,6 +1,6 @@
 import DetailedInfoCard from "./DetailedInfoCard";
 import { UseWeatherContext } from "../../../context/WeatherAppContext";
-import { t } from "../../../utilities/Utilities";
+import { getImperialUnit, t } from "../../../utilities/Utilities";
 
 export default function CurrentWeatherDetails() {
   const { weather, searchStatus, units, language } = UseWeatherContext();
@@ -13,7 +13,14 @@ export default function CurrentWeatherDetails() {
           searchStatus === "loading"
             ? "-"
             : weather
-            ? `${Math.round(weather.current.temperature_2m)}°`
+            ? `${Math.round(
+                units.temperature === "celsius"
+                  ? weather.current.temperature_2m
+                  : getImperialUnit(
+                      "fahrenheit",
+                      weather.current.temperature_2m
+                    )
+              )}°`
             : ""
         }
       />
@@ -33,7 +40,11 @@ export default function CurrentWeatherDetails() {
           searchStatus === "loading"
             ? "-"
             : weather
-            ? `${Math.round(weather.current.wind_speed_10m)} ${units.wind}`
+            ? `${Math.round(
+                units.wind === "kmh"
+                  ? weather.current.wind_speed_10m
+                  : getImperialUnit("mph", weather.current.wind_speed_10m)
+              )} ${units.wind}`
             : ""
         }
       />
@@ -43,9 +54,11 @@ export default function CurrentWeatherDetails() {
           searchStatus === "loading"
             ? "-"
             : weather
-            ? `${Math.round(weather.current.precipitation)} ${
-                units.precipitation
-              }`
+            ? `${Math.round(
+                units.precipitation === "mm"
+                  ? weather.current.precipitation
+                  : getImperialUnit("inch", weather.current.precipitation)
+              )} ${units.precipitation}`
             : ""
         }
       />

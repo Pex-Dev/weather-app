@@ -1,4 +1,4 @@
-import { getCorrectIcon } from "../../../utilities/Utilities";
+import { getCorrectIcon, getImperialUnit } from "../../../utilities/Utilities";
 import { UseWeatherContext } from "../../../context/WeatherAppContext";
 import { t } from "../../../utilities/Utilities";
 
@@ -10,6 +10,7 @@ export default function MainInfoCard() {
     favorites,
     handleFavorite,
     setLocationsToCompare,
+    units,
   } = UseWeatherContext();
 
   const dateFormater = (rawDate: string): string => {
@@ -102,7 +103,11 @@ export default function MainInfoCard() {
           />
           {/* Current temperature */}
           <p className="text-7xl md:text-8xl font-bold text-white italic ">
-            {Math.round(weather.current.temperature_2m)}
+            {Math.round(
+              units.temperature === "celsius"
+                ? weather.current.temperature_2m
+                : getImperialUnit("fahrenheit", weather.current.temperature_2m)
+            )}
             <span className="not-italic"> °</span>
           </p>
         </div>

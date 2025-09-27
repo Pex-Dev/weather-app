@@ -1,11 +1,11 @@
 import { useEffect, useMemo, useState } from "react";
 import { UseWeatherContext } from "../../../context/WeatherAppContext";
-import { t } from "../../../utilities/Utilities";
+import { getImperialUnit, t } from "../../../utilities/Utilities";
 import DaySelector from "../../UI/DaySelector";
 import HourlyForecastCard from "./HourlyForecastCard";
 
 export default function HourlyForecast() {
-  const { weather, searchStatus, language, theme } = UseWeatherContext();
+  const { weather, searchStatus, language, theme, units } = UseWeatherContext();
   const [selectedDay, setSelectedDay] = useState<Date | null>(null);
 
   useEffect(() => {
@@ -52,16 +52,20 @@ export default function HourlyForecast() {
           theme === "dark" ? "custom-scrollbar-dark" : "custom-scrollbar"
         }`}
       >
-        {searchStatus === "loading" || !selectedDay
-          ? ""
-          : hourlyData?.map((hData, i) => (
-              <HourlyForecastCard
-                key={i}
-                time={hData.time.getHours()}
-                weatherCode={hData.weatherCode}
-                temperature={hData.temperature}
-              />
-            ))}
+        {searchStatus === "success" &&
+          selectedDay !== null &&
+          hourlyData?.map((hData, i) => (
+            <HourlyForecastCard
+              key={i}
+              time={hData.time.getHours()}
+              weatherCode={hData.weatherCode}
+              temperature={
+                units.temperature === "celsius"
+                  ? hData.temperature
+                  : getImperialUnit("fahrenheit", hData.temperature)
+              }
+            />
+          ))}
       </ul>
     </div>
   );
