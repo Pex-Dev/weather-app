@@ -82,6 +82,7 @@ export default function MainInfoCard() {
     return (
       <div className="relative w-full flex flex-col md:flex-row md:items-center md:justify-between gap-9 rounded-3xl overflow-hidden py-12 md:px-5 bg-[url('/images/bg-today-small.svg')] md:bg-[url('/images/bg-today-large.svg')]  bg-no-repeat bg-cover">
         <div className="flex flex-col gap-2">
+          {/* City and country */}
           <h2 className="text-white text-center md:text-left text-2xl font-semibold">
             {`${weather.name}, ${weather.country}`}
           </h2>
@@ -90,6 +91,7 @@ export default function MainInfoCard() {
           </p>
         </div>
         <div className="flex items-center gap-2 mx-auto md:mx-0 min-w-[280px] md:min-w-[320px] ">
+          {/* Icon */}
           <img
             src={getCorrectIcon(
               weather.current.weather_code,
@@ -98,11 +100,13 @@ export default function MainInfoCard() {
             alt="Icon sunny"
             className="max-w-30 md:max-w-32 shrink-0"
           />
+          {/* Current temperature */}
           <p className="text-7xl md:text-8xl font-bold text-white italic ">
             {Math.round(weather.current.temperature_2m)}
             <span className="not-italic"> °</span>
           </p>
         </div>
+        {/* Button add to favorites */}
         <button
           aria-label={t(language, labelKey)}
           title={t(language, labelKey)}
@@ -121,6 +125,7 @@ export default function MainInfoCard() {
             ? savedAsFavoriteIcon
             : saveAsFavoriteIcon}
         </button>
+        {/* Button compare locations */}
         <button
           onClick={() => setLocationsToCompare([weather])}
           className="bg-ui-main/70 hover:bg-ui-main/90 flex gap-3 px-2 absolute bottom-3 left-2/5 md:bottom-auto md:top-4 md:left-4 rounded-md p-0.5 hover:cursor-pointer text-neutral-200 hover:text-white"
