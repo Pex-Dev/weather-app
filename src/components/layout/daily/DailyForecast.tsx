@@ -19,16 +19,16 @@ export default function DailyForecast() {
       <h3 className="dark:text-white text-xl dark:font-light mt-3">
         {t(language, "daily_forecast")}
       </h3>
-      <div className="grid grid-cols-3 md:grid-cols-7 gap-4">
+      <div className="grid grid-cols-3 md:grid-cols-7 gap-3 md:gap-4">
         {searchStatus === "loading" ? (
           <>
-            <div className="bg-white dark:bg-ui-main w-full min-h-[158px] border dark:border-ui-main-border rounded-xl border-cyan-600 shadow-md dark:shadow-2xl"></div>
-            <div className="bg-white dark:bg-ui-main w-full min-h-[158px] border dark:border-ui-main-border rounded-xl border-cyan-600 shadow-md dark:shadow-2xl"></div>
-            <div className="bg-white dark:bg-ui-main w-full min-h-[158px] border dark:border-ui-main-border rounded-xl border-cyan-600 shadow-md dark:shadow-2xl"></div>
-            <div className="bg-white dark:bg-ui-main w-full min-h-[158px] border dark:border-ui-main-border rounded-xl border-cyan-600 shadow-md dark:shadow-2xl"></div>
-            <div className="bg-white dark:bg-ui-main w-full min-h-[158px] border dark:border-ui-main-border rounded-xl border-cyan-600 shadow-md dark:shadow-2xl"></div>
-            <div className="bg-white dark:bg-ui-main w-full min-h-[158px] border dark:border-ui-main-border rounded-xl border-cyan-600 shadow-md dark:shadow-2xl"></div>
-            <div className="bg-white dark:bg-ui-main w-full min-h-[158px] border dark:border-ui-main-border rounded-xl border-cyan-600 shadow-md dark:shadow-2xl"></div>
+            <div className="bg-white dark:bg-ui-main w-full min-h-[158px] border dark:border-ui-main-border rounded-lg md:rounded-xl border-cyan-600 shadow-md dark:shadow-2xl"></div>
+            <div className="bg-white dark:bg-ui-main w-full min-h-[158px] border dark:border-ui-main-border rounded-lg md:rounded-xl border-cyan-600 shadow-md dark:shadow-2xl"></div>
+            <div className="bg-white dark:bg-ui-main w-full min-h-[158px] border dark:border-ui-main-border rounded-lg md:rounded-xl border-cyan-600 shadow-md dark:shadow-2xl"></div>
+            <div className="bg-white dark:bg-ui-main w-full min-h-[158px] border dark:border-ui-main-border rounded-lg md:rounded-xl border-cyan-600 shadow-md dark:shadow-2xl"></div>
+            <div className="bg-white dark:bg-ui-main w-full min-h-[158px] border dark:border-ui-main-border rounded-lg md:rounded-xl border-cyan-600 shadow-md dark:shadow-2xl"></div>
+            <div className="bg-white dark:bg-ui-main w-full min-h-[158px] border dark:border-ui-main-border rounded-lg md:rounded-xl border-cyan-600 shadow-md dark:shadow-2xl"></div>
+            <div className="bg-white dark:bg-ui-main w-full min-h-[158px] border dark:border-ui-main-border rounded-lg md:rounded-xl border-cyan-600 shadow-md dark:shadow-2xl"></div>
           </>
         ) : (
           weather &&

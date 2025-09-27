@@ -35,8 +35,8 @@ export default function MainInfoCard() {
 
   const savedAsFavoriteIcon = (
     <svg
-      width="40px"
-      height="40px"
+      width="35px"
+      height="35px"
       viewBox="0 0 24.00 24.00"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -58,8 +58,8 @@ export default function MainInfoCard() {
 
   const saveAsFavoriteIcon = (
     <svg
-      width="40px"
-      height="40px"
+      width="35px"
+      height="35px"
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -81,7 +81,7 @@ export default function MainInfoCard() {
 
   if (searchStatus === "success" && weather) {
     return (
-      <div className="relative w-full flex flex-col md:flex-row md:items-center md:justify-between gap-9 rounded-3xl overflow-hidden py-12 md:px-5 bg-[url('/images/bg-today-small.svg')] md:bg-[url('/images/bg-today-large.svg')]  bg-no-repeat bg-cover">
+      <div className="relative shadow-md w-full flex flex-col md:flex-row md:items-center md:justify-between gap-5 md:gap-9 rounded-2xl md:rounded-3xl overflow-hidden pt-8 pb-15 md:py-12 md:px-5 bg-[url('/images/bg-today-small.svg')] md:bg-[url('/images/bg-today-large.svg')] bg-center bg-no-repeat bg-cover">
         <div className="flex flex-col gap-2">
           {/* City and country */}
           <h2 className="text-white text-center md:text-left text-2xl font-semibold">
@@ -91,7 +91,7 @@ export default function MainInfoCard() {
             {dateFormater(weather.current.time)}
           </p>
         </div>
-        <div className="flex items-center gap-2 mx-auto md:mx-0 min-w-[280px] md:min-w-[320px] ">
+        <div className="flex items-center justify-center gap-2 mx-auto md:mx-0 min-w-[280px] md:min-w-[320px] ">
           {/* Icon */}
           <img
             src={getCorrectIcon(
@@ -99,10 +99,10 @@ export default function MainInfoCard() {
               new Date(weather.current.time).getHours()
             )}
             alt="Icon sunny"
-            className="max-w-30 md:max-w-32 shrink-0"
+            className="max-w-23 md:max-w-32 shrink-0"
           />
           {/* Current temperature */}
-          <p className="text-7xl md:text-8xl font-bold text-white italic ">
+          <p className="text-6xl md:text-7xl lg:text-8xl font-bold text-white italic ">
             {Math.round(
               units.temperature === "celsius"
                 ? weather.current.temperature_2m
@@ -131,38 +131,40 @@ export default function MainInfoCard() {
             : saveAsFavoriteIcon}
         </button>
         {/* Button compare locations */}
-        <button
-          onClick={() => setLocationsToCompare([weather])}
-          className="bg-ui-main/70 hover:bg-ui-main/90 flex gap-3 px-2 absolute bottom-3 left-2/5 md:bottom-auto md:top-4 md:left-4 rounded-md p-0.5 hover:cursor-pointer text-neutral-200 hover:text-white"
-        >
-          <span>{t(language, "compare")}</span>
-          <svg
-            fill="currentColor"
-            width="25px"
-            height="25px"
-            viewBox="0 0 24.00 24.00"
-            xmlns="http://www.w3.org/2000/svg"
-            stroke="#000000"
-            strokeWidth="0.00024000000000000003"
+        <div className="absolute bottom-3 w-full md:bottom-auto md:top-4 md:left-4">
+          <button
+            onClick={() => setLocationsToCompare([weather])}
+            className="text-sm md:text-base items-center border border-cyan-800 md:border-cyan-800/50 mx-auto md:ml-0 bg-ui-main hover:bg-ui-main-hover lg:bg-ui-main/70 md:hover:bg-ui-main/90 flex gap-3 px-2  rounded-md p-0.5 hover:cursor-pointer text-neutral-200 hover:text-white"
           >
-            <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
-            <g
-              id="SVGRepo_tracerCarrier"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            ></g>
-            <g id="SVGRepo_iconCarrier">
-              <path d="M1,8A1,1,0,0,1,2,7H9.586L7.293,4.707A1,1,0,1,1,8.707,3.293l4,4a1,1,0,0,1,0,1.414l-4,4a1,1,0,1,1-1.414-1.414L9.586,9H2A1,1,0,0,1,1,8Zm21,7H14.414l2.293-2.293a1,1,0,0,0-1.414-1.414l-4,4a1,1,0,0,0,0,1.414l4,4a1,1,0,0,0,1.414-1.414L14.414,17H22a1,1,0,0,0,0-2Z"></path>
-            </g>
-          </svg>
-        </button>
+            <span>{t(language, "compare")}</span>
+            <svg
+              fill="currentColor"
+              width="25px"
+              height="25px"
+              viewBox="0 0 24.00 24.00"
+              xmlns="http://www.w3.org/2000/svg"
+              stroke="#000000"
+              strokeWidth="0.00024000000000000003"
+            >
+              <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+              <g
+                id="SVGRepo_tracerCarrier"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              ></g>
+              <g id="SVGRepo_iconCarrier">
+                <path d="M1,8A1,1,0,0,1,2,7H9.586L7.293,4.707A1,1,0,1,1,8.707,3.293l4,4a1,1,0,0,1,0,1.414l-4,4a1,1,0,1,1-1.414-1.414L9.586,9H2A1,1,0,0,1,1,8Zm21,7H14.414l2.293-2.293a1,1,0,0,0-1.414-1.414l-4,4a1,1,0,0,0,0,1.414l4,4a1,1,0,0,0,1.414-1.414L14.414,17H22a1,1,0,0,0,0-2Z"></path>
+              </g>
+            </svg>
+          </button>
+        </div>
       </div>
     );
   }
 
   if (searchStatus === "loading") {
     return (
-      <div className="flex flex-col items-center justify-center gap-9 rounded-3xl overflow-hidden  bg-white dark:bg-ui-main h-[316px] md:h-[224px]">
+      <div className="shadow-md flex flex-col items-center justify-center gap-5 md:gap-9 rounded-2xl md:rounded-3xl overflow-hidden  bg-white dark:bg-ui-main h-[268px] md:h-[224px]">
         <div className="flex flex-col gap-2 justify-center items-center">
           <div className="animation-jump-container flex gap-2 w-fit">
             <span className="animation-jump block w-2 h-2 bg-neutral-600 dark:bg-white rounded-full"></span>

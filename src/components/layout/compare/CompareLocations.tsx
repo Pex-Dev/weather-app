@@ -29,6 +29,7 @@ export default function CompareLocations() {
   return (
     <div className="mt-8">
       <header className="flex justify-start">
+        {/* Button Back */}
         <button
           aria-label={t(language, "back_to_forecast")}
           title={t(language, "back_to_forecast")}
@@ -50,7 +51,7 @@ export default function CompareLocations() {
             <path d="M5 10h11a4 4 0 1 1 0 8h-1" />
           </svg>
         </button>
-        <h1 className="w-full text-5xl text-white font-bricolage-grotesque text-center">
+        <h1 className="w-full text-4xl md:text-5xl text-white font-bricolage-grotesque font-semibold text-center">
           {t(language, "compare_locations")}
         </h1>
       </header>

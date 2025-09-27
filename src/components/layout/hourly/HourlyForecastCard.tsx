@@ -10,14 +10,14 @@ export default function HourlyForecastCard({
   temperature: number;
 }) {
   return (
-    <li className="w-full pr-3 rounded-lg bg-neutral-100 dark:bg-ui-main-hover border border-neutral-200 dark:border-ui-main-border flex justify-between items-center">
+    <li className="w-full pr-3 rounded md:rounded-lg bg-neutral-100 dark:bg-ui-main-hover border border-neutral-200 dark:border-ui-main-border flex justify-between items-center">
       <div className="flex items-center gap-2">
         <img
           src={getCorrectIcon(weatherCode, time)}
           alt={WeatherCodes[weatherCode].name}
-          className="max-w-13"
+          className="max-w-10 md:max-w-13"
         />
-        <p className="min-w-[70px] text-neutral-700 dark:text-white uppercase text-xl">
+        <p className="min-w-[70px] text-neutral-700 dark:text-white uppercase text-lg md:text-xl">
           {time} pm
         </p>
       </div>

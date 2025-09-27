@@ -4,7 +4,7 @@ export default function Title() {
   const { language } = UseWeatherContext();
 
   return (
-    <h1 className="font-bricolage-grotesque text-5xl text-center text-white font-semibold mt-8">
+    <h1 className="font-bricolage-grotesque text-4xl md:text-5xl text-center text-white font-semibold mt-8">
       {t(language, "title")}
     </h1>
   );

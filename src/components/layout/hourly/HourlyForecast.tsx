@@ -36,7 +36,7 @@ export default function HourlyForecast() {
   }, [selectedDay, weather]);
 
   return (
-    <div className="w-full lg:max-w-[345px] bg-white border border-cyan-600 shadow-md dark:shadow-2xl dark:border-ui-main-border dark:bg-ui-main rounded-2xl lg:rounded-3xl py-4 pl-4 mt-4 md:mt-0 max-h-[602px] overflow-hidden">
+    <div className="w-full lg:max-w-[345px] bg-white border border-cyan-600 shadow-md dark:shadow-2xl dark:border-ui-main-border dark:bg-ui-main rounded-lg md:rounded-2xl lg:rounded-3xl py-3 md:py-4 pl-3 md:pl-4 mt-2 md:mt-0 max-h-[602px] overflow-hidden">
       <header className="flex justify-between items-center mr-4">
         <h3 className="text-neutral-700 dark:text-white text-xl font-light">
           {t(language, "hourly_forecast")}
@@ -48,7 +48,7 @@ export default function HourlyForecast() {
         />
       </header>
       <ul
-        className={`my-3 flex flex-col gap-3 overflow-y-auto max-h-[520px] pr-4 focus:outline-0 focus:border-t focus:border-b focus:border-ui-main-border ${
+        className={`my-3 flex flex-col gap-2.5 md:gap-3 overflow-y-auto max-h-[520px] pr-3 md:pr-4 focus:outline-0 focus:border-t focus:border-b focus:border-ui-main-border ${
           theme === "dark" ? "custom-scrollbar-dark" : "custom-scrollbar"
         }`}
       >

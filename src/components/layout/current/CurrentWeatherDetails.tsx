@@ -6,7 +6,7 @@ export default function CurrentWeatherDetails() {
   const { weather, searchStatus, units, language } = UseWeatherContext();
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-2">
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 md:mt-2">
       <DetailedInfoCard
         label={t(language, "feels_like")}
         value={

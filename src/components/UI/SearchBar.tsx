@@ -25,7 +25,7 @@ export default function SearchBar({
   const { searchLocation, setSearchStatus, getWeather, language } =
     UseWeatherContext();
 
-  let inputClassName = `bg-white hover:bg-neutral-100 dark:bg-ui-main hover:dark:bg-ui-main-hover border-2 border-transparent focus-visible:border-background focus-visible:outline-2 focus-visible:outline-white focus-visible:border-2 transition-colors hover:cursor-pointer w-full rounded-lg text-neutral-800 dark:text-white text-lg py-3.5`;
+  let inputClassName = `shadow-sm md:shadow-md bg-white hover:bg-neutral-100 dark:bg-ui-main hover:dark:bg-ui-main-hover border-2 border-transparent focus-visible:border-background focus-visible:outline-2 focus-visible:outline-white focus-visible:border-2 transition-colors hover:cursor-pointer w-full rounded-lg text-neutral-800 dark:text-white text-lg py-1.5 md:py-3.5`;
   inputClassName += inputText.length > 0 ? " p-3" : " pl-15";
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -78,6 +78,7 @@ export default function SearchBar({
     >
       <div ref={searchDivRef} className="relative w-full">
         <div className="relative">
+          {/* Input search */}
           <input
             type="search"
             name="search"
@@ -88,14 +89,13 @@ export default function SearchBar({
             className={inputClassName}
           />
           {inputText.length < 1 && (
-            <img
-              src={searchIcon}
-              alt="Search icon"
-              className="absolute left-5 top-1/3"
-            />
+            <div className="h-full absolute top-0 flex justify-center items-center p-4 md:p-5">
+              <img src={searchIcon} alt="Search icon" />
+            </div>
           )}
         </div>
         {searchInProgress && (
+          // Searching message
           <div className="flex gap-3 absolute mt-3 bg-ui-main rounded-lg p-4.5 w-full shadow-2xl z-10">
             <img
               src={loadingIcon}
@@ -105,10 +105,12 @@ export default function SearchBar({
             <p className="text-white">{t(language, "searching")}</p>
           </div>
         )}
+        {/* Results */}
         {results && (
           <ul className="flex flex-col gap-3 absolute mt-3 bg-white dark:bg-ui-main border border-cyan-300 dark:border-ui-main-border rounded-lg p-2 w-full shadow-2xl z-10">
             {results.length > 0 ? (
               results.map((result: Result) => (
+                //Individual result
                 <li key={result.id}>
                   <button
                     onClick={() => {
@@ -145,16 +147,18 @@ export default function SearchBar({
           </ul>
         )}
       </div>
-      <div className="flex bg-cyan-100 dark:bg-ui-main-hover rounded-r-xl rounded-l-lg">
+      <div className="shadow-md flex bg-cyan-100 dark:bg-ui-main-hover rounded-lg">
+        {/* Button submit */}
         <button
           type="submit"
           aria-label={t(language, "search")}
           title={t(language, "search")}
-          className="flex-1 bg-blue-700 hover:bg-blue-800 border-2 border-transparent focus-visible:border-background focus-visible:outline-2 focus-visible:outline-blue-700 transition-colors hover:cursor-pointer text-white text-lg rounded-lg py-3.5 px-6"
+          className="flex-1 bg-blue-700 hover:bg-blue-800 border-2 border-transparent focus-visible:border-background focus-visible:outline-2 focus-visible:outline-blue-700 transition-colors hover:cursor-pointer text-white text-lg rounded-lg py-1.5 md:py-3.5 px-6"
         >
           {t(language, "search")}
         </button>
         {favoriteButton && (
+          //Button favorites
           <button
             type="button"
             aria-label={t(language, "favorites")}
@@ -163,8 +167,8 @@ export default function SearchBar({
             onClick={() => setShowFavorites(!showFavorites)}
           >
             <svg
-              width="38px"
-              height="38px"
+              width="35px"
+              height="35px"
               viewBox="0 0 24 24"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
