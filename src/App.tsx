@@ -6,9 +6,10 @@ import Dashboard from "./components/layout/Dashboard";
 import Error from "./components/layout/Error";
 import CompareLocations from "./components/layout/compare/CompareLocations";
 import { UseWeatherContext } from "./context/WeatherAppContext";
+import { t } from "./utilities/Utilities";
 
 function App() {
-  const { searchStatus, locationsToCompare } = UseWeatherContext();
+  const { searchStatus, locationsToCompare, language } = UseWeatherContext();
 
   return (
     <div className="p-4 max-w-[1220px] mx-auto">
@@ -25,7 +26,7 @@ function App() {
               <SearchBar showNoResultsScreen={true} favoriteButton={true} />
               {searchStatus === "no-results" ? (
                 <h2 className="text-white text-4xl text-center mt-10">
-                  No search result found!
+                  {t(language, "no_results")}
                 </h2>
               ) : (
                 <Dashboard />
