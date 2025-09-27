@@ -265,3 +265,19 @@ export const getTheme = (): "light" | "dark" => {
 
   return theme === "dark" ? "dark" : "light";
 };
+
+export const getImperialUnit = (
+  unitType: "inch" | "mph" | "fahrenheit",
+  value: number
+): number => {
+  if (unitType === "fahrenheit") {
+    return (value * 9) / 5 + 32;
+  }
+  if (unitType === "inch") {
+    return value / 25.4;
+  }
+  if (unitType === "mph") {
+    return value / 1.60934;
+  }
+  return value;
+};
