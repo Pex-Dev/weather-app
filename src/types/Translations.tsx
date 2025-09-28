@@ -42,6 +42,8 @@ export const translations = {
     compare_locations: "Compare Locations",
     back_to_forecast: "Back to forecast",
     remove: "Remove",
+    microphone_blocked: "you have blocked access to the microphone",
+    search_by_speech: "Search by speech",
   },
   es: {
     title: "¿Cómo se ve el cielo hoy?",
@@ -86,6 +88,8 @@ export const translations = {
     compare_locations: "Comparar ubicaciones",
     back_to_forecast: "Volver al pronóstico",
     remove: "Quitar",
+    microphone_blocked: "Has bloqueado el acceso al micrófono",
+    search_by_speech: "Búsqueda por voz",
   },
 } as const;
 
