@@ -1,8 +1,9 @@
 import { useState, useRef, useEffect } from "react";
-import searchIcon from "../../assets/images/icon-search.svg";
-import type { Result } from "../../types/Types";
 import { UseWeatherContext } from "../../context/WeatherAppContext";
+import type { Result } from "../../types/Types";
 import { t } from "../../utilities/Utilities";
+import useSpeech from "../../hooks/useSpeech";
+import searchIcon from "../../assets/images/icon-search.svg";
 import Favorites from "./favorites/Favorites";
 
 export default function SearchBar({
@@ -24,7 +25,20 @@ export default function SearchBar({
   const { searchLocation, setSearchStatus, getWeather, language } =
     UseWeatherContext();
 
-  let inputClassName = `shadow-sm md:shadow-md bg-white hover:bg-neutral-100 dark:bg-ui-main hover:dark:bg-ui-main-hover border-2 border-transparent focus-visible:border-background focus-visible:outline-2 focus-visible:outline-white focus-visible:border-2 transition-colors hover:cursor-pointer w-full rounded-lg text-neutral-800 dark:text-white text-lg py-1.5 md:py-3.5`;
+  const speechResults = (result: string) => {
+    setInputText(result);
+    handleSubmit(result);
+  };
+
+  const {
+    speechRecognitionSupported,
+    microphonePermission,
+    startListening,
+    stopListening,
+    listening,
+  } = useSpeech(speechResults);
+
+  let inputClassName = `shadow-sm md:shadow-md bg-white hover:bg-neutral-100 dark:bg-ui-main hover:dark:bg-ui-main-hover border-2 border-transparent focus-visible:border-background focus-visible:outline-2 focus-visible:outline-white focus-visible:border-2 transition-colors hover:cursor-pointer w-full rounded-lg text-neutral-800 dark:text-white text-lg py-1.5 md:py-3.5 pr-12`;
   inputClassName += inputText.length > 0 ? " p-3" : " pl-15";
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -35,10 +49,15 @@ export default function SearchBar({
   };
 
   //Submit form
-  const handleSubmit = async () => {
-    if (inputText.length < 3) return;
+  const handleSubmit = async (speechSearch: string = "") => {
+    if (speechSearch.length === 0) {
+      if (inputText.length < 3) return;
+    }
+
     setSearchInProgress(true);
-    const results: Result[] | null = await searchLocation(inputText);
+    const results: Result[] | null = await searchLocation(
+      speechSearch.length > 0 ? speechSearch : inputText
+    );
     if (!results && showNoResultsScreen) setSearchStatus("no-results");
     setResults(results !== null ? results : []);
     setSearchInProgress(false);
@@ -90,6 +109,50 @@ export default function SearchBar({
           {inputText.length < 1 && (
             <div className="h-full absolute top-0 flex justify-center items-center p-4 md:p-5">
               <img src={searchIcon} alt="Search icon" />
+            </div>
+          )}
+          {speechRecognitionSupported && (
+            <div className="absolute right-0 top-0 flex items-center h-full">
+              <button
+                aria-label="Search by speech"
+                type="button"
+                title={
+                  microphonePermission
+                    ? t(language, "search_by_speech")
+                    : t(language, "microphone_blocked")
+                }
+                className={`p-3 ${
+                  microphonePermission
+                    ? "cursor-pointer text-neutral-500 dark:text-white"
+                    : "cursor-not-allowed text-neutral-500/30 dark:text-white/30"
+                } ${listening ? "animate-pulse" : "hover:scale-105"}`}
+                onClick={() => (listening ? stopListening() : startListening())}
+              >
+                <svg
+                  width="23px"
+                  height="23px"
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+                  <g
+                    id="SVGRepo_tracerCarrier"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  ></g>
+                  <g id="SVGRepo_iconCarrier">
+                    <path
+                      d="M5 3C5 1.34315 6.34315 0 8 0C9.65685 0 11 1.34315 11 3V7C11 8.65685 9.65685 10 8 10C6.34315 10 5 8.65685 5 7V3Z"
+                      fill="currentColor"
+                    ></path>
+                    <path
+                      d="M9 13.9291V16H7V13.9291C3.60771 13.4439 1 10.5265 1 7V6H3V7C3 9.76142 5.23858 12 8 12C10.7614 12 13 9.76142 13 7V6H15V7C15 10.5265 12.3923 13.4439 9 13.9291Z"
+                      fill="currentColor"
+                    ></path>
+                  </g>
+                </svg>
+              </button>
             </div>
           )}
         </div>
@@ -147,8 +210,11 @@ export default function SearchBar({
                 </li>
               ))
             ) : (
+              //No results
               <li className="h-[34px] flex items-center">
-                <p className="text-white">{t(language, "no_results")}</p>
+                <p className="text-neutral-700 dark:text-white">
+                  {t(language, "no_results")}
+                </p>
               </li>
             )}
           </ul>
