@@ -1,9 +1,9 @@
 import { UseWeatherContext } from "../../context/WeatherAppContext";
-import useGeolocalization from "../../hooks/useGeolocalization";
+import useGeolocation from "../../hooks/useGeolocation";
 import { t } from "../../utilities/Utilities";
 export default function Geolocation() {
   const { language } = UseWeatherContext();
-  const { geolocationnStatus, getCurrentLocation } = useGeolocalization();
+  const { geolocationnStatus, getCurrentLocation } = useGeolocation();
 
   if (geolocationnStatus === "not supported") {
     return (
