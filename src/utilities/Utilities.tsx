@@ -233,11 +233,19 @@ export const saveLanguage = (language: "en" | "es") => {
 
 export const getLanguage = (): "en" | "es" => {
   const language = localStorage.getItem("language");
+
+  const html = document.documentElement;
+
   if (!language) {
     const preferedLanguage = navigator.language;
-    if (preferedLanguage.startsWith("es")) return "es";
+    if (preferedLanguage.startsWith("es")) {
+      html.lang = "es";
+      return "es";
+    }
     return "en";
   }
+
+  html.lang = language;
 
   return language === "es" ? "es" : "en";
 };

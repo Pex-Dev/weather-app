@@ -86,6 +86,10 @@ export default function WeatherProvider({
   const handleLanguageChange = (newLanguage: "en" | "es") => {
     setLanguage(newLanguage);
     saveLanguage(newLanguage);
+    const html = document.documentElement;
+    console.log(html);
+
+    html.lang = newLanguage;
   };
 
   const handleMainUnitsChange = (newMainUnits: "imperial" | "metric") => {
