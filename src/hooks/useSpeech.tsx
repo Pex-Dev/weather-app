@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { UseWeatherContext } from "../context/WeatherAppContext";
 
 interface SpeechRecognitionEvent extends Event {
   readonly resultIndex: number;
@@ -32,6 +33,8 @@ export default function useSpeech(onResult: (result: string) => void) {
     useState<boolean>(true);
   const [listening, setListening] = useState<boolean>(false);
 
+  const { language } = UseWeatherContext();
+
   type SpeechRecognitionConstructor = new () => ISpeechRecognition;
 
   //Ref to instance of speech recognition
@@ -51,7 +54,7 @@ export default function useSpeech(onResult: (result: string) => void) {
 
     //Create instance of speech recognition
     const recognition = new SpeechRecognition();
-    recognition.lang = "es-ES";
+    recognition.lang = language === "en" ? "en-US" : "es-ES";
     recognition.continuous = false;
     recognition.interimResults = false;
     recognition.maxAlternatives = 1;
