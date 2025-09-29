@@ -14,7 +14,6 @@ import type {
   Result,
   SearchStatus,
   Weather,
-  ReverseGeocoding,
   Location,
 } from "../types/Types";
 import axios from "axios";
@@ -39,14 +38,11 @@ type WeatherState = {
     country: string,
     latitude: number,
     longitude: number,
-    startLoading?: boolean,
     setAsCompareLocation?: boolean
   ) => void;
   tryAgain: () => void;
   favorites: Location[];
   handleFavorite: (location: Location) => void;
-  getCurrentLocation: () => void;
-  locationAllowed?: boolean;
   theme: "light" | "dark";
   toggleTheme: () => void;
   locationsToCompare: Weather[] | null;
@@ -70,23 +66,10 @@ export default function WeatherProvider({
   const [units, setUnits] = useState<Units>(getUnits());
   const [favorites, setFavorites] = useState<Location[]>(getFavorites());
   const [theme, setTheme] = useState<"light" | "dark">(getTheme());
-  const [locationAllowed, setLocationAllowed] = useState<boolean | undefined>(
-    undefined
-  );
+
   const [locationsToCompare, setLocationsToCompare] = useState<
     Weather[] | null
   >(null);
-
-  const isGeolocationSupported: boolean = "geolocation" in navigator;
-
-  //Check if the user has already granted permission for geolocation
-  useEffect(() => {
-    navigator.permissions.query({ name: "geolocation" }).then((result) => {
-      if (result.state === "granted") {
-        navigator.geolocation.getCurrentPosition(currentPosition);
-      }
-    });
-  }, []);
 
   useEffect(() => {
     const html = document.documentElement;
@@ -167,13 +150,10 @@ export default function WeatherProvider({
     country: string,
     latitude: number,
     longitude: number,
-    startLoading: boolean = false,
-    setAsCompareLocation: boolean = false
+    setAsCompareLocation: boolean = false //Set the result in the locations to compare list
   ) => {
-    if (!startLoading) {
-      if (searchStatus === "loading") return;
-      setSearchStatus("loading");
-    }
+    if (searchStatus === "loading") return;
+    setSearchStatus("loading");
 
     //Save search data to use in case of retry
     setSearchData({ name, country, latitude, longitude });
@@ -200,39 +180,6 @@ export default function WeatherProvider({
     }
   };
 
-  const currentPosition = async (position: GeolocationPosition) => {
-    setSearchStatus("loading");
-    setLocationAllowed(true);
-    try {
-      const { latitude, longitude } = position.coords;
-      const response = await axios.get(
-        `https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json&accept-language=${language}`
-      );
-
-      const location: ReverseGeocoding = response.data;
-      getWeather(
-        location.address.city,
-        location.address.country,
-        latitude,
-        longitude,
-        true
-      );
-    } catch (error) {
-      console.error(error);
-      setSearchStatus("idle");
-    }
-  };
-
-  const getCurrentLocation = () => {
-    if (isGeolocationSupported) {
-      navigator.geolocation.getCurrentPosition(currentPosition, () =>
-        setLocationAllowed(false)
-      );
-    } else {
-      console.log("Geolocation is not supported by this browser.");
-    }
-  };
-
   // Retry fetching weather data when in error state
   const tryAgain = () => {
     if (!searchData) return;
@@ -241,7 +188,6 @@ export default function WeatherProvider({
       searchData.country,
       searchData.latitude,
       searchData.longitude,
-      false,
       locationsToCompare ? true : false
     );
   };
@@ -301,8 +247,6 @@ export default function WeatherProvider({
         tryAgain,
         favorites,
         handleFavorite,
-        getCurrentLocation,
-        locationAllowed,
         theme,
         toggleTheme,
         locationsToCompare,
