@@ -14,24 +14,20 @@ function App() {
   return (
     <div className="p-4 max-w-[1220px] mx-auto">
       <Header />
-      {searchStatus === "error" ? (
+      {searchStatus === "error" ? ( //If there are errors
         <Error />
+      ) : locationsToCompare !== null ? ( //If there are locations to compare
+        <CompareLocations />
       ) : (
         <>
-          {locationsToCompare !== null ? (
-            <CompareLocations />
+          <Title />
+          <SearchBar showNoResultsScreen={true} favoriteButton={true} />
+          {searchStatus === "no-results" ? (
+            <h2 className="text-white text-4xl text-center mt-10">
+              {t(language, "no_results")}
+            </h2>
           ) : (
-            <>
-              <Title />
-              <SearchBar showNoResultsScreen={true} favoriteButton={true} />
-              {searchStatus === "no-results" ? (
-                <h2 className="text-white text-4xl text-center mt-10">
-                  {t(language, "no_results")}
-                </h2>
-              ) : (
-                <Dashboard />
-              )}
-            </>
+            <Dashboard />
           )}
         </>
       )}
