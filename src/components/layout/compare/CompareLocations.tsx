@@ -5,8 +5,13 @@ import type { Result } from "../../../types/Types";
 import { t } from "../../../utilities/Utilities";
 
 export default function CompareLocations() {
-  const { locationsToCompare, setLocationsToCompare, getWeather, language } =
-    UseWeatherContext();
+  const {
+    locationsToCompare,
+    setLocationsToCompare,
+    getWeather,
+    language,
+    searchStatus,
+  } = UseWeatherContext();
 
   const handleResult = (result: Result) => {
     const exist = locationsToCompare?.some(
@@ -63,6 +68,12 @@ export default function CompareLocations() {
               location={location}
             />
           ))}
+          {searchStatus === "loading" && (
+            <li
+              className="text-neutral-700
+     dark:text-white bg-white dark:bg-ui-main p-2 md:p-3 lg:p-4 rounded-lg shadow-md dark:shadow-2xl flex flex-col justify-between animate-pulse"
+            ></li>
+          )}
         </ul>
       )}
     </div>
