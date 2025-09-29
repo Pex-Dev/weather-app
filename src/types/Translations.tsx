@@ -32,6 +32,9 @@ export const translations = {
     get_location: "Get your location",
     location_blocked:
       "You have blocked access to your location. Don't worry, search for your city in the search bar to see the weather.",
+    geolocation_not_supported:
+      "Geolocation isn't supported by your browser. Don't worry, search for your city in the search bar to see the weather.",
+    geolocation_error: "An error occurred while obtaining your location.",
     dark_theme: "Dark Theme",
     light_theme: "Light Theme",
     change_to: "Change to ",
@@ -78,6 +81,9 @@ export const translations = {
     get_location: "Obtener tu ubicación",
     location_blocked:
       "Has bloqueado el acceso a tu ubicación. No te preocupes, busca tu ciudad en la barra de búsqueda para ver el clima.",
+    geolocation_not_supported:
+      "La geolocalización no es soportada por tu navegador. No te preocupes, busca tu ciudad en la barra de búsqueda para ver el clima.",
+    geolocation_error: "Ha ocurrido un error al obtener tu ubicación",
     dark_theme: "Tema oscuro",
     light_theme: "Tema claro",
     change_to: "Cambiar a ",
