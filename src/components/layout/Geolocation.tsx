@@ -26,7 +26,10 @@ export default function Geolocation() {
         </p>
       )}
       <button
-        onClick={() => getCurrentLocation()}
+        onClick={() => {
+          if (geolocationnStatus === "searching") return;
+          getCurrentLocation();
+        }}
         className={`p-2 max-w-[300px] flex items-center text-lg rounded-lg  transition-colors  w-fit mx-auto ${
           geolocationnStatus === "searching"
             ? "bg-green-700/40 hover:cursor-progress text-white/40"
