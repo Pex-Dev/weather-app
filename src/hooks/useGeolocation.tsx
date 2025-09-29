@@ -7,7 +7,8 @@ export default function useGeolocation() {
   const [geolocationnStatus, setGeolocationnStatus] = useState<
     "idle" | "searching" | "denied" | "not supported" | "error"
   >("idle");
-  const { getWeather, language } = UseWeatherContext();
+  const { getWeather, language, searchStatus, setSearchStatus } =
+    UseWeatherContext();
 
   const isGeolocationSupported: boolean = "geolocation" in navigator;
 
@@ -25,6 +26,8 @@ export default function useGeolocation() {
   }, []);
 
   const currentPosition = async (position: GeolocationPosition) => {
+    if (searchStatus === "loading") return;
+    setSearchStatus("loading");
     setGeolocationnStatus("searching");
     try {
       const { latitude, longitude } = position.coords;
