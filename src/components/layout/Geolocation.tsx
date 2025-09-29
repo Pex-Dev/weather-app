@@ -1,18 +1,37 @@
 import { UseWeatherContext } from "../../context/WeatherAppContext";
+import useGeolocalization from "../../hooks/useGeolocalization";
 import { t } from "../../utilities/Utilities";
 export default function Geolocation() {
-  const { language, locationAllowed, getCurrentLocation } = UseWeatherContext();
+  const { language } = UseWeatherContext();
+  const { geolocationnStatus, getCurrentLocation } = useGeolocalization();
+
+  if (geolocationnStatus === "not supported") {
+    return (
+      <p className="mx-auto mt-15 md:mt-18 py-2 px-3 text-center text-white border border-red-500 mb-5 max-w-[500px] ">
+        {t(language, "geolocation_not_supported")}
+      </p>
+    );
+  }
 
   return (
     <div className="mx-auto w-fit mt-15 md:mt-18">
-      {locationAllowed === false && (
+      {geolocationnStatus === "denied" && (
         <p className="py-2 px-3 text-center text-white border border-red-500 mb-5 max-w-[500px] ">
           {t(language, "location_blocked")}
         </p>
       )}
+      {geolocationnStatus === "error" && (
+        <p className="py-2 px-3 text-center text-white border border-red-500 mb-5 max-w-[500px] ">
+          {t(language, "geolocation_error")}
+        </p>
+      )}
       <button
         onClick={() => getCurrentLocation()}
-        className="p-2 max-w-[300px] text-white flex items-center text-lg rounded-lg bg-green-700 hover:cursor-pointer hover:bg-green-800 transition-colors  w-fit mx-auto"
+        className={`p-2 max-w-[300px] flex items-center text-lg rounded-lg  transition-colors  w-fit mx-auto ${
+          geolocationnStatus === "searching"
+            ? "bg-green-700/40 hover:cursor-progress text-white/40"
+            : "bg-green-700 hover:bg-green-800 hover:cursor-pointer  text-white"
+        }`}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
