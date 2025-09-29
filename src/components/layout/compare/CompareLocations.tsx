@@ -20,7 +20,6 @@ export default function CompareLocations() {
         result.country !== undefined ? result.country : "",
         result.latitude,
         result.longitude,
-        false,
         true
       );
     }
