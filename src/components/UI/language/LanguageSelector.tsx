@@ -30,6 +30,7 @@ export default function LanguageSelector() {
   return (
     <div ref={unitsDiv} className="relative">
       <button
+        type="button"
         onClick={() => setShowDropdown((prev) => !prev)}
         aria-label={t(language, "language")}
         title={t(language, "language")}
